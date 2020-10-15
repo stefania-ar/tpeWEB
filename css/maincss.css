@@ -1,0 +1,102 @@
+
+body {
+  align-items: center;
+  background-color: #ddddfd;
+}
+
+html{
+  font-style: normal;
+  font-family: sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+
+.cssGeneral{
+  box-sizing: border-box;
+  margin: 1vh 0.25vh;
+  border: 0;
+  background: #111;
+  padding: 1.2vh 2vh;
+  outline: none;
+  color: #ddd;
+  transition: 0.5s;
+  border-radius: 20px;
+}
+
+.cssGeneral:hover{
+  box-shadow: 0 0 10px 4px rgba(164, 136, 255, 0.7);
+}
+
+button{
+  box-sizing: border-box;
+  border: 0;
+  margin: 0.5vh;
+  background: rgba(164, 136, 255, 0.7);
+  color: #fff;
+  padding: 1vh 1.1vh;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  width: auto;
+  max-width: 32vh;
+}
+
+h1{
+  padding-top: 2vh;
+}
+
+a{
+  text-decoration: none;
+  text-emphasis-style: none;
+  color: #fff;
+}
+
+a:hover {
+  color:#fff;
+  text-decoration: none;
+}
+
+label{
+  font-weight: bold;
+}
+
+#logoutBTN{
+  float: right;
+  border-radius: 0;
+  width: auto;
+  align-self: flex-end;
+}
+
+#mainForms{
+  padding: 2.2 0;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  align-items: center;
+  justify-content: flex-end;
+  width: auto;
+}
+
+th{
+  outline-style: solid;
+  outline-width: thin;
+  outline-color: rgba(164, 136, 255, 0.7);
+  text-align: center;
+}
+
+td{
+    outline-style: solid;
+    outline-width: thin;
+    outline-color: rgba(164, 136, 255, 0.7);
+    text-align: center;
+    padding: 0 1vh;
+}
+
+#btn-Home{
+  top: 1vh;
+  float: right;
+}

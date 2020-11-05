@@ -65,7 +65,7 @@ class ControllerPeliculas{
     }
     
     function viewAllGenres(){
-        $generos=$this->model->selectAllGenres();
+        $generos=$this->modelGeneros->selectAllGenres();
         $this->view->viewAllGenres($generos);
     }
 
@@ -109,7 +109,7 @@ class ControllerPeliculas{
         $this->checkLogin();
 
         $genre= $_POST['generoCrear'];
-        $this->model->insertGenre($genre);
+        $this->modelGeneros->insertGenre($genre);
         $this->view->homeLocation();
     }
 
@@ -123,7 +123,7 @@ class ControllerPeliculas{
 
     function showForm($params=null){
         $id= $params [':ID'];
-        $generos=$this->model->selectAllGenres();
+        $generos=$this->modelGeneros->selectAllGenres();
         $peliculas=$this->model->returnMovieByID($id);
         $this->view->showForm($id, $generos, $peliculas);
         
@@ -141,14 +141,15 @@ class ControllerPeliculas{
         $this->checkLogin();
 
         $id= $params [':ID'];
-        $this->model->deleteGenre($id);
+        $this->modelGeneros->deleteGenre($id);
         $this->view->genresLocation();
     }
 
     function showFormGenres($params=null){
+        $this->checkLogin();
         $id_genero= $params [':ID'];
 
-        $genero=$this->model->returnGenreByID($id_genero);
+        $genero=$this->modelGeneros->returnGenreByID($id_genero);
         $this->view->showFormGenre($id_genero, $genero);
     }
 
@@ -157,7 +158,7 @@ class ControllerPeliculas{
         
         $id_genero= $params [':ID'];
         $nombre=$_POST['genreName'];
-        $this->model->editGenre($nombre, $id_genero);
+        $this->modelGeneros->editGenre($nombre, $id_genero);
         $this->view->genresLocation();
     }
 

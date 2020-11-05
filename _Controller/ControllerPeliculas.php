@@ -4,32 +4,37 @@ require_once './_Model/ModelPeliculas.php';
 require_once './_View/ViewPeliculas.php';
 require_once './_View/ViewUser.php';
 require_once './_Model/ModelUser.php';
+require_once './_Model/ModelGeneros.php';
 
-Class ControllerPeliculas{
+class ControllerPeliculas{
 
     private $model;
     private $view;
     private $viewUser;
     private $modelUser;
+    private $modelGeneros;
 
     function __construct(){
         $this->model= new ModelPeliculas();
         $this->view= new ViewPeliculas();
         $this->viewUser= new ViewUser();
         $this->modelUser= new ModelUser();
+        $this->modelGeneros= new ModelGeneros();
     }
 
     function home (){
-        $peliculas=$this->model->selectAllGenres();
+        $generos=$this->modelGeneros->selectAllGenres();
 
-        session_start();
-        $user;
-        if(isset($_SESSION['USER'])){
-            $user=true;
-        }else $user=false;
-
+        $user=$this->checkUser();
         
-        $this->view->showHome($peliculas, $user);
+        $this->view->showHome($generos, $user);
+    }
+
+    private function checkUser(){
+        session_start();
+        if(isset($_SESSION['USER'])){
+            return true;
+        }else return false;
     }
 
     private function checkLogin(){
@@ -160,6 +165,11 @@ Class ControllerPeliculas{
         $id= $params [':ID'];
         $peliculas=$this->model->returnMovieByID($id);
         $this->view->viewAllMovies($peliculas);
+    }
+
+    function shownum(){
+        $c=$this->model->getCapacidad();
+        $this->view->showcap($c);
     }
 }
 

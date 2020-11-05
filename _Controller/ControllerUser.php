@@ -51,7 +51,7 @@ Class ControllerUser{
 
             }else $this->view->render_login("Usuario incorrecto");
             
-        }
+        }//else die???
     }
     
 }

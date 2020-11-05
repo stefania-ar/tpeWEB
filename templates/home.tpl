@@ -17,9 +17,9 @@
             <input class="cssGeneral" type="text" name="director_a" placeholder="inserte director/a">
             <input class="cssGeneral" type="number" name="calif" placeholder="inserte calficacion">
             <select class="cssGeneral" name="genero" >
-                {foreach $peliculas as $pelicula} 
-                    $pelicula->nombre;
-                    <option value={$pelicula->id_genero}>{$pelicula->nombre}</option>
+                {foreach $generos as $genero} 
+                    $genero->nombre;
+                    <option value={$genero->id_genero}>{$genero->nombre}</option>
                 {/foreach}
                 </select>
             <button type="submit">{$Enviar}</button>
@@ -38,9 +38,9 @@
         <form action="selectByGenre" method="post">
             <label for="genero">{$genero}</label>
             <select class="cssGeneral" name="genero2" >
-            {foreach from =$peliculas item=pelicula} 
+            {foreach from =$generos item=genero} 
                 $pelicula->nombre;
-                <option value={$pelicula->nombre}>{$pelicula->nombre}</option>
+                <option value={$genero->nombre}>{$genero->nombre}</option>
             {/foreach}    
             </select>
         <button type="submit">{$Enviar}</button>

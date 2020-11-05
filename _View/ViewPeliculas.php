@@ -3,7 +3,6 @@ require_once('libs/smarty/Smarty.class.php');
 
 class ViewPeliculas{
 
-
     private $title;
 
     function __construct(){
@@ -71,10 +70,10 @@ class ViewPeliculas{
         $smarty->display('templates/viewAllGenres.tpl');
     }
 
-    function showHome($peliculas, $user){
+    function showHome($generos, $user){
         $smarty = new Smarty();
         $smarty->assign('title_header', $this->title);
-        $smarty->assign('peliculas', $peliculas);
+        $smarty->assign('generos', $generos);
         $smarty->assign('titulo', "Filtrar/buscar peliculas por");
         $smarty->assign('titulo2', "Agregue un género");
         $smarty->assign('anio', "Año");
@@ -118,6 +117,15 @@ class ViewPeliculas{
         $smarty->assign('title_header', $this->title);
 
         $smarty->display('templates/form_edit_genre.tpl');
+    }
+
+    function showcap($c){
+        $smarty = new Smarty();
+        $smarty->assign('c', $c);
+        $smarty->assign('Enviar', "Enviar");
+        $smarty->assign('title_header', $this->title);
+
+        $smarty->display('templates/num.tpl');
     }
 
 }

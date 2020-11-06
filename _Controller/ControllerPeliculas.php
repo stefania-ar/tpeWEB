@@ -65,24 +65,33 @@ class ControllerPeliculas{
         $this->checkLogin();
 
         $genre=$_POST['genero'];
-        $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$genre);
-        $this->view->homeLocation();
+        if(isset($_POST['title']) && ($_POST['anio']) && ($_POST['pais']) && ($_POST['director_a']) && ($_POST['calif']) && ($genre) ){
+            $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$genre);
+            $this->view->homeLocation();
+        } else $this->view->showError("Complete los campos para continuar");
+        
     }
 
     function viewAllMovies(){
         $peliculas=$this->model->selectAllTable();
-        $this->view->onlyMovies($peliculas);
+        $type=$this->checkType();
+        $this->view->onlyMovies($peliculas, $type);
     }
     
     function viewAllGenres(){
+        $type=$this->checkType();
         $generos=$this->modelGeneros->selectAllGenres();
-        $this->view->viewAllGenres($generos);
+        $this->view->viewAllGenres($generos, $type);
     }
 
     function viewByGenre(){
         $genre= $_POST['genero2'];
-        $peliculas=$this->model->selectByGenre($genre);
-        $this->view->viewAllMovies($peliculas);
+
+        if(isset($genre)){
+            $peliculas=$this->model->selectByGenre($genre);
+            $this->view->viewAllMovies($peliculas);
+        }
+        
     }
 
     function searchByName(){
@@ -93,34 +102,48 @@ class ControllerPeliculas{
 
     function searchByYear(){
         $anio= $_POST['anio'];
-        $peliculas=$this->model->returnYear($anio);
-        $this->view->viewAllMovies($peliculas);
+
+        if(isset($anio)){
+            $peliculas=$this->model->returnYear($anio);
+            $this->view->viewAllMovies($peliculas);
+        }
     }
 
     function searchByCountry(){
         $pais= $_POST['pais2'];
-        $peliculas=$this->model->returnCountry($pais);
-        $this->view->viewAllMovies($peliculas);
+
+        if(isset($pais)){
+            $peliculas=$this->model->returnCountry($pais);
+            $this->view->viewAllMovies($peliculas);
+        }
     }
 
     function searchByDirection(){
         $direccion = $_POST['direccion'];
-        $peliculas=$this->model->returnDirection($direccion);
-        $this->view->viewAllMovies($peliculas);
+
+        if(isset($direccion)){
+            $peliculas=$this->model->returnDirection($direccion);
+            $this->view->viewAllMovies($peliculas);
+        }
     }
 
     function searchByCalification(){
         $calif = $_POST['calificacion'];
-        $peliculas=$this->model->returnCalif($calif);
-        $this->view->viewAllMovies($peliculas);
+
+        if(isset($calif)){
+            $peliculas=$this->model->returnCalif($calif);
+            $this->view->viewAllMovies($peliculas);
+        }
     }
 
     function addGenre(){
         $this->checkLogin();
 
         $genre= $_POST['generoCrear'];
-        $this->modelGeneros->insertGenre($genre);
-        $this->view->homeLocation();
+        if(isset($genre)){
+            $this->modelGeneros->insertGenre($genre);
+            $this->view->homeLocation();
+        }
     }
 
     function deleteMovie($params=null){
@@ -143,8 +166,11 @@ class ControllerPeliculas{
         $this->checkLogin();
 
         $id= $params [':ID'];
-        $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
-        $this->view->moviesLocation();
+        var_dump($_POST['title']);
+        if(isset($_POST['title']) && ($_POST['anio']) && ($_POST['pais']) && ($_POST['director_a']) && ($_POST['calif']) && ($_POST['genero'])){
+            $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
+            $this->view->moviesLocation();
+        }
     }
 
     function deleteGenre($params=null){
@@ -168,8 +194,11 @@ class ControllerPeliculas{
         
         $id_genero= $params [':ID'];
         $nombre=$_POST['genreName'];
-        $this->modelGeneros->editGenre($nombre, $id_genero);
-        $this->view->genresLocation();
+        if(isset($nombre)){
+            $this->modelGeneros->editGenre($nombre, $id_genero);
+            $this->view->genresLocation();
+        }
+       
     }
 
     function showDetail($params=null){

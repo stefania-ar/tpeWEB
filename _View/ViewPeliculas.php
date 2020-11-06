@@ -7,6 +7,7 @@ class ViewPeliculas{
 
     function __construct(){
         $this->title= "PELIS";
+        $this->smarty = new Smarty();
     }
 
     function homeLocation(){
@@ -22,111 +23,110 @@ class ViewPeliculas{
     }
 
     function viewAllMovies($peliculas){
-        $smarty = new Smarty();
+        $this->smarty->assign('title_header', $this->title);
+        $this->smarty->assign('peliculas', $peliculas);
+        $this->smarty->assign('titulo', "Título");
+        $this->smarty->assign('Anio', "Año");
+        $this->smarty->assign('Pais', "País");
+        $this->smarty->assign('Genero', "Género");
+        $this->smarty->assign('Director_a', "Director/a");
+        $this->smarty->assign('Calificacion', "Calificación");
+        $this->smarty->assign('home', "HOME");
 
-        $smarty->assign('title_header', $this->title);
-        $smarty->assign('peliculas', $peliculas);
-        $smarty->assign('titulo', "Título");
-        $smarty->assign('Anio', "Año");
-        $smarty->assign('Pais', "País");
-        $smarty->assign('Genero', "Género");
-        $smarty->assign('Director_a', "Director/a");
-        $smarty->assign('Calificacion', "Calificación");
-        $smarty->assign('home', "HOME");
-
-        $smarty->display('templates/viewAllMovies.tpl');
+        $this->smarty->display('templates/viewAllMovies.tpl');
     }
 
-    function onlyMovies($peliculas){
-        $smarty = new Smarty();
+    function onlyMovies($peliculas, $type){
+        $this->smarty->assign('title_header', $this->title);
+        $this->smarty->assign('peliculas', $peliculas);
+        $this->smarty->assign('titulo', "Título");
+        $this->smarty->assign('Anio', "Año");
+        $this->smarty->assign('Pais', "País");
+        $this->smarty->assign('Genero', "Género");
+        $this->smarty->assign('Director_a', "Director/a");
+        $this->smarty->assign('Calificacion', "Calificación");
+        $this->smarty->assign('eliminar', "Eliminar");
+        $this->smarty->assign('editar', "Editar");
+        $this->smarty->assign('detalle', "Ver detalle");
+        $this->smarty->assign('home', "HOME");
+        $this->smarty->assign('type', $type);
 
-        $smarty->assign('title_header', $this->title);
-        $smarty->assign('peliculas', $peliculas);
-        $smarty->assign('titulo', "Título");
-        $smarty->assign('Anio', "Año");
-        $smarty->assign('Pais', "País");
-        $smarty->assign('Genero', "Género");
-        $smarty->assign('Director_a', "Director/a");
-        $smarty->assign('Calificacion', "Calificación");
-        $smarty->assign('eliminar', "Eliminar");
-        $smarty->assign('editar', "Editar");
-        $smarty->assign('detalle', "Ver detalle");
-        $smarty->assign('home', "HOME");
-
-        $smarty->display('templates/onlyMovies.tpl');
+        $this->smarty->display('templates/onlyMovies.tpl');
     }
  
-    function viewAllGenres($generos){
-        $smarty = new Smarty();
+    function viewAllGenres($generos, $type){
+        $this->smarty->assign('title_header', $this->title);
+        $this->smarty->assign('titulo', "LISTA DE GENEROS");
+        $this->smarty->assign('generos', $generos);
+        $this->smarty->assign('eliminar', "Eliminar");
+        $this->smarty->assign('editar', "Editar");
+        $this->smarty->assign('G', "Generos");
+        $this->smarty->assign('home', "HOME");
+        $this->smarty->assign('type', $type);
 
-        $smarty->assign('title_header', $this->title);
-        $smarty->assign('titulo', "LISTA DE GENEROS");
-        $smarty->assign('generos', $generos);
-        $smarty->assign('eliminar', "Eliminar");
-        $smarty->assign('editar', "Editar");
-        $smarty->assign('G', "Generos");
-        $smarty->assign('home', "HOME");
-
-        $smarty->display('templates/viewAllGenres.tpl');
+        $this->smarty->display('templates/viewAllGenres.tpl');
     }
 
     function showHome($generos, $user, $type){
-        $smarty = new Smarty();
-        $smarty->assign('title_header', $this->title);
-        $smarty->assign('generos', $generos);
-        $smarty->assign('titulo', "Filtrar/buscar peliculas por");
-        $smarty->assign('titulo2', "Agregue un género");
-        $smarty->assign('anio', "Año");
-        $smarty->assign('pais', "País");
-        $smarty->assign('direccion', "Director/a");
-        $smarty->assign('Enviar', "Enviar");
-        $smarty->assign('calif', "Calificacion");
-        $smarty->assign('genero', "Género");
-        $smarty->assign('l', "logout");
-        $smarty->assign('li', "login");
-        $smarty->assign('user', $user);
-        $smarty->assign('type', $type);
-        $smarty->assign('tituloH', "Agregue sus peliculas favoritas");
+        $this->smarty->assign('title_header', $this->title);
+        $this->smarty->assign('generos', $generos);
+        $this->smarty->assign('titulo', "Filtrar/buscar peliculas por");
+        $this->smarty->assign('titulo2', "Agregue un género");
+        $this->smarty->assign('anio', "Año");
+        $this->smarty->assign('pais', "País");
+        $this->smarty->assign('direccion', "Director/a");
+        $this->smarty->assign('Enviar', "Enviar");
+        $this->smarty->assign('calif', "Calificacion");
+        $this->smarty->assign('genero', "Género");
+        $this->smarty->assign('l', "logout");
+        $this->smarty->assign('li', "login");
+        $this->smarty->assign('user', $user);
+        $this->smarty->assign('type', $type);
+        $this->smarty->assign('tituloH', "Agregue sus peliculas favoritas");
 
-        $smarty->display('templates/home.tpl');
+        $this->smarty->display('templates/home.tpl');
     }
 
     function showForm($id, $generos, $peliculas){
-        $smarty = new Smarty();
+        $this->smarty->assign('title_header', $this->title);
+        $this->smarty->assign('generos', $generos);
+        $this->smarty->assign('id', $id);
+        $this->smarty->assign('peliculas', $peliculas);
+        $this->smarty->assign('titulo', "Filtrar/buscar peliculas por");
+        $this->smarty->assign('titulo2', "Agregue un género");
+        $this->smarty->assign('anio', "Año");
+        $this->smarty->assign('pais', "País");
+        $this->smarty->assign('direccion', "Director/a");
+        $this->smarty->assign('Enviar', "Enviar");
+        $this->smarty->assign('calif', "Calificacion");
+        $this->smarty->assign('genero', "Género");
+        $this->smarty->assign('BASE_URL', "'BASE_URL'");
 
-        $smarty->assign('title_header', $this->title);
-        $smarty->assign('generos', $generos);
-        $smarty->assign('id', $id);
-        $smarty->assign('peliculas', $peliculas);
-        $smarty->assign('titulo', "Filtrar/buscar peliculas por");
-        $smarty->assign('titulo2', "Agregue un género");
-        $smarty->assign('anio', "Año");
-        $smarty->assign('pais', "País");
-        $smarty->assign('direccion', "Director/a");
-        $smarty->assign('Enviar', "Enviar");
-        $smarty->assign('calif', "Calificacion");
-        $smarty->assign('genero', "Género");
-        $smarty->assign('BASE_URL', "'BASE_URL'");
-
-        $smarty->display('templates/form_edit.tpl');
+        $this->smarty->display('templates/form_edit.tpl');
     }
 
     function showFormGenre($id_genero, $genero){
-        $smarty = new Smarty();
-        $smarty->assign('genero', $genero);
-        $smarty->assign('Enviar', "Enviar");
-        $smarty->assign('title_header', $this->title);
+        $this->smarty->assign('genero', $genero);
+        $this->smarty->assign('Enviar', "Enviar");
+        $this->smarty->assign('title_header', $this->title);
 
-        $smarty->display('templates/form_edit_genre.tpl');
+        $this->smarty->display('templates/form_edit_genre.tpl');
     }
 
     function showcap($c){
-        $smarty = new Smarty();
-        $smarty->assign('c', $c);
-        $smarty->assign('Enviar', "Enviar");
-        $smarty->assign('title_header', $this->title);
+        $this->smarty->assign('c', $c);
+        $this->smarty->assign('Enviar', "Enviar");
+        $this->smarty->assign('title_header', $this->title);
 
-        $smarty->display('templates/num.tpl');
+        $this->smarty->display('templates/num.tpl');
+    }
+
+    function showError($msj){
+        $this->smarty->assign('title_header', "No se puede continuar");
+        $this->smarty->assign('msj', $msj);
+        $this->smarty->assign('home', "HOME");
+        
+        $this->smarty->display('./templates/showError.tpl');
     }
 
 }

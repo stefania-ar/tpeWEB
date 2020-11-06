@@ -11,8 +11,10 @@
         {foreach $generos as $genero} 
                 <tr>
                     <td> {$genero->nombre} </td>
-                    <td><button><a href="borrar_genero/{$genero->id_genero}"> {$eliminar}</a></button></td>
-                    <td><button><a href="editar_genero/{$genero->id_genero}"> {$editar}</a></button></td>
+                    {if $type eq true}
+                        <td><button><a href="borrar_genero/{$genero->id_genero}"> {$eliminar}</a></button></td>
+                        <td><button><a href="editar_genero/{$genero->id_genero}"> {$editar}</a></button></td>
+                    {/if}
                 </tr>
         {/foreach}
         </tbody>    

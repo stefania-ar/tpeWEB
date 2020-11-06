@@ -42,11 +42,19 @@ class ViewUser{
         $this->smarty->assign('users', $users);
         $this->smarty->assign('type', $type);
         $this->smarty->assign('user', "Usuario");
+        $this->smarty->assign('admin', "Administrador/a");
+        $this->smarty->assign('comun', "Común");
         $this->smarty->assign('tipo', "Tipo de usuario");
+        $this->smarty->assign('permiso', "Cambiar permisos");
+        $this->smarty->assign('titulo', "Tabla de permisos para administradores");
+        $this->smarty->assign('home', "HOME");
 
         $this->smarty->display('./templates/viewUsers.tpl');
     }
 
+    function usersLocation(){
+        header("Location: ".BASE_URL."showAllUsers");
+    }
 
 
 }

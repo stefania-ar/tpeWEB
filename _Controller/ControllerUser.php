@@ -87,9 +87,33 @@ Class ControllerUser{
     
     function getAllUsers(){
         $type=$this->checkType();
-        $users=$this->model->getUsers();
-        $this->view->showUsers($users, $type);
 
+        if($type ==true){
+            $users=$this->model->getUsers();
+            $this->view->showUsers($users, $type);
+        }else $this->view->homeLocation();
+        
+    }
+
+    function cambiarPermisos($params=null){
+        $permiso=$this->checkType();
+
+        if ($permiso== true){
+            $id= $params [':ID'];
+            $userDB=$this->model->getUserByID($id);
+
+            $type=$userDB->tipo_usuario;
+
+            if ($type == 1) {
+                $type=0;
+            }else {
+                $type=1;
+            }
+            
+            $this->model->cambiarPermisos($type, $id);
+            $this->view->usersLocation();
+        }else $this->view->homeLocation();
+        
     }
 }
 

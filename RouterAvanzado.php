@@ -2,6 +2,7 @@
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 define('LOGIN', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/login');
 define('LOGOUT', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/logout');
+define('USERS', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/showAllUsers');
 
 
 require_once '_Controller/ControllerPeliculas.php';
@@ -39,6 +40,7 @@ $r->addRoute("verify", "POST", "ControllerUser", "verifyUser");
 $r->addRoute("register", "GET", "ControllerUser", "registerUser");
 $r->addRoute("registerForm", "POST", "ControllerUser", "registerNewUser"); 
 $r->addRoute("showAllUsers", "GET", "ControllerUser", "getAllUsers");
+$r->addRoute("cambiarPermisos/:ID", "GET", "ControllerUser", "cambiarPermisos");
 
 $r->setDefaultRoute("ControllerPeliculas", "home");
 

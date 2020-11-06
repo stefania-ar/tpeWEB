@@ -24,6 +24,17 @@ Class ModelUser{
          return $sentencia-> fetchAll(PDO::FETCH_OBJ);
      }
 
+     function cambiarPermisos($type, $id){
+         $sentencia=$this->db->prepare("UPDATE users SET tipo_usuario=? WHERE id=?");
+         $sentencia->execute(array($type, $id));
+
+     }
+
+     function getUserByID($id){
+        $sentencia=$this->db->prepare(" SELECT * FROM users WHERE id=?");
+        $sentencia-> execute(array($id));
+        return $sentencia-> fetch(PDO::FETCH_OBJ);
+     }
     
 }
 

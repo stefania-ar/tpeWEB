@@ -1,13 +1,13 @@
-#upper{
-  margin: 25%;
-  height: 99px;
-  width: 300px;
+.margin {
+  margin: 5%;
 }
 
 body {
   align-items: center;
   background-color: #ddddfd;
   margin-top: 5%;
+  margin-left: 2vh;
+  line-height: 1.15;
 }
 
 html{
@@ -16,6 +16,7 @@ html{
   margin: 0;
   box-sizing: border-box;
   padding: 0;
+  line-height: 1.15;
 }
 
 
@@ -29,6 +30,7 @@ html{
   color: #ddd;
   transition: 0.5s;
   border-radius: 20px;
+  line-height: 1.15;
 }
 
 .cssGeneral:hover{
@@ -101,6 +103,7 @@ td{
     text-align: center;
     padding: 0 1vh;
 }
+
 
 #btn-Home{
   top: 1vh;

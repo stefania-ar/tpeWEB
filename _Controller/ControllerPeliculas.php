@@ -24,15 +24,25 @@ class ControllerPeliculas{
 
     function home (){
         $generos=$this->modelGeneros->selectAllGenres();
-
-        $user=$this->checkUser();
         
-        $this->view->showHome($generos, $user);
+        $user=$this->checkUser();
+        $type=$this->checkType();
+        
+        $this->view->showHome($generos, $user, $type);
     }
 
     private function checkUser(){
         session_start();
         if(isset($_SESSION['USER'])){
+            return true;
+        }else return false;
+    }
+
+    private function checkType(){
+        if(session_status()== PHP_SESSION_NONE){
+            session_start();
+        }
+        if(isset($_SESSION['TYPE']) && ($_SESSION['TYPE'] == 1)){
             return true;
         }else return false;
     }

@@ -70,7 +70,7 @@ class ViewPeliculas{
         $smarty->display('templates/viewAllGenres.tpl');
     }
 
-    function showHome($generos, $user){
+    function showHome($generos, $user, $type){
         $smarty = new Smarty();
         $smarty->assign('title_header', $this->title);
         $smarty->assign('generos', $generos);
@@ -85,6 +85,7 @@ class ViewPeliculas{
         $smarty->assign('l', "logout");
         $smarty->assign('li', "login");
         $smarty->assign('user', $user);
+        $smarty->assign('type', $type);
         $smarty->assign('tituloH', "Agregue sus peliculas favoritas");
 
         $smarty->display('templates/home.tpl');

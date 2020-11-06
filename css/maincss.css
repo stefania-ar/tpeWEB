@@ -1,7 +1,13 @@
+#upper{
+  margin: 25%;
+  height: 99px;
+  width: 300px;
+}
 
 body {
   align-items: center;
   background-color: #ddddfd;
+  margin-top: 5%;
 }
 
 html{
@@ -100,3 +106,4 @@ td{
   top: 1vh;
   float: right;
 }
+

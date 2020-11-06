@@ -24,8 +24,13 @@
                 </select>
             <button type="submit">{$Enviar}</button>
         </form>
+
         <button><a href="showAll" >MOSTRAR TODAS LAS PELIS</a></button>
         <button><a href="showAllGenres" >MOSTRAR TODOS LOS GÉNEROS</a></button>
+        {if $type eq true}
+            <button><a href="showAllUsers" >MOSTRAR LISTA USUARIOS</a></button>
+        {/if}
+        
 
         <h2>{$titulo2}</h2>
         <form action="crearGenero" method="post">

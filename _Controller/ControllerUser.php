@@ -51,9 +51,46 @@ Class ControllerUser{
 
             }else $this->view->render_login("Usuario incorrecto");
             
-        }//else die???
+        }
+    }
+
+    function registerUser(){
+        $this->view->showFormRegister("");
+    }
+
+    function registerNewUser(){
+        $user= $_POST['userR'];
+        $password=$_POST['passwordR'];
+
+        if(isset($user) && ($password)){
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $this->model->registerUser($user, $hash);
+
+            session_start();
+
+                $userDB=$this->model->getUser($user);
+                $_SESSION['USER']=  $userDB->username;
+                $_SESSION['TYPE']=  $userDB->tipo_usuario;
+
+                $this->view->homeLocation();
+        }else $this->view->showFormRegister("Ingrese usuario y/o contraseña");
+    }
+
+    private function checkType(){
+        if(session_status()== PHP_SESSION_NONE){
+            session_start();
+        }
+        if(isset($_SESSION['TYPE']) && ($_SESSION['TYPE'] == 1)){
+            return true;
+        }else return false;
     }
     
+    function getAllUsers(){
+        $type=$this->checkType();
+        $users=$this->model->getUsers();
+        $this->view->showUsers($users, $type);
+
+    }
 }
 
 

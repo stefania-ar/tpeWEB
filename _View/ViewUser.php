@@ -48,6 +48,7 @@ class ViewUser{
         $this->smarty->assign('permiso', "Cambiar permisos");
         $this->smarty->assign('titulo', "Tabla de permisos para administradores");
         $this->smarty->assign('home', "HOME");
+        $this->smarty->assign('button', "borrar");
 
         $this->smarty->display('./templates/viewUsers.tpl');
     }

@@ -35,6 +35,11 @@ Class ModelUser{
         $sentencia-> execute(array($id));
         return $sentencia-> fetch(PDO::FETCH_OBJ);
      }
+
+     function deleteUser($id){
+         $sentencia=$this->db->prepare("DELETE FROM users WHERE id=?");
+         $sentencia->execute(array($id));
+     }
     
 }
 

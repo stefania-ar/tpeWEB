@@ -115,6 +115,17 @@ Class ControllerUser{
         }else $this->view->homeLocation();
         
     }
+
+    function deleteUser($params=null){
+        $permiso=$this->checkType();
+        
+        if ($permiso== true){
+        $id= $params [':ID'];
+        $this->model->deleteUser($id);
+        $this->view->usersLocation();
+        
+        }
+    }
 }
 
 

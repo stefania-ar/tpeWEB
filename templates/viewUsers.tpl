@@ -21,6 +21,7 @@
                         <td>{$comun}</td>
                     {/if}
                     <td><button><a href="cambiarPermisos/{$user->id}"> {$permiso}</a></button></td>
+                    <td><button><a href="delete/{$user->id}">{$button}</a><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                 </tr>
         {/foreach}
         </tbody>    

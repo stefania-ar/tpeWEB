@@ -41,6 +41,7 @@ $r->addRoute("register", "GET", "ControllerUser", "registerUser");
 $r->addRoute("registerForm", "POST", "ControllerUser", "registerNewUser"); 
 $r->addRoute("showAllUsers", "GET", "ControllerUser", "getAllUsers");
 $r->addRoute("cambiarPermisos/:ID", "GET", "ControllerUser", "cambiarPermisos");
+$r->addRoute("delete/:ID", "GET", "ControllerUser", "deleteUser");
 
 $r->setDefaultRoute("ControllerPeliculas", "home");
 

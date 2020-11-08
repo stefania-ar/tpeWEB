@@ -5,7 +5,7 @@
 body {
   align-items: center;
   background-color: #ddddfd;
-  margin-top: 5%;
+  margin-top: 1%;
   margin-left: 2vh;
   line-height: 1.15;
 }
@@ -16,7 +16,6 @@ html{
   margin: 0;
   box-sizing: border-box;
   padding: 0;
-  line-height: 1.15;
 }
 
 

@@ -65,17 +65,20 @@ class ControllerPeliculas{
         $this->checkLogin();
 
         $genre=$_POST['genero'];
-        if(isset($_POST['title']) && ($_POST['anio']) && ($_POST['pais']) && ($_POST['director_a']) && ($_POST['calif']) && ($genre) ){
-            $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$genre);
-            $this->view->homeLocation();
+        if(isset($_POST['title']) && ($_POST['title'] !=null)&&
+            ($_POST['anio']) && ($_POST['pais']) && ($_POST['director_a']) && ($_POST['calif']) && ($genre) ){
+                $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$genre);
+                $this->view->homeLocation();
         } else $this->view->showError("Complete los campos para continuar");
         
     }
 
     function viewAllMovies(){
         $peliculas=$this->model->selectAllTable();
+        $user=$this->checkUser();
         $type=$this->checkType();
-        $this->view->onlyMovies($peliculas, $type);
+        
+        $this->view->onlyMovies($peliculas, $type, $user);
     }
     
     function viewAllGenres(){
@@ -166,11 +169,13 @@ class ControllerPeliculas{
         $this->checkLogin();
 
         $id= $params [':ID'];
-        var_dump($_POST['title']);
-        if(isset($_POST['title']) && ($_POST['anio']) && ($_POST['pais']) && ($_POST['director_a']) && ($_POST['calif']) && ($_POST['genero'])){
-            $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
-            $this->view->moviesLocation();
-        }
+
+        if(isset($_POST['title']) && ($_POST['title'] !=null) && ($_POST['anio']) && ($_POST['pais']) && 
+            ($_POST['director_a']) && ($_POST['calif']) && ($_POST['genero'])){
+                $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
+                $this->view->moviesLocation();
+
+        }else $this->view->showError("Complete los campos para continuar");
     }
 
     function deleteGenre($params=null){

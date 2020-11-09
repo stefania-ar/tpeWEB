@@ -1,17 +1,15 @@
 <?php
 
 require_once '_Model/ModelComentarios.php';
-require_once '_View/ApiView.php';
+require_once 'APIController.php';
 
-class ControllerApi{
 
-    private $modelComentarios;
-    private $view;
+class CommentsControllerApi extends ApiController {
 
     function __construct(){
         #$this->modelPeliculas= new ModelPeliculas();
+        parent::__construct();
         $this->modelComentarios= new ModelComentarios();
-        $this->view= new ApiView();
     }
 
     function getComments($params=null){
@@ -31,6 +29,20 @@ class ControllerApi{
         }
         
     }
+
+    function deleteComment($params=null){
+        $id= $params [':ID'];
+        $this->modelComentarios->eliminarComent($id);
+        $this->view->response("se borro", 200); 
+         
+    }
+
+    function insertComment($params=null){
+        $body=$this->getData();
+
+        $this->modelComentarios->insertComment($body->comentario, $body->id_usuario, $body->id_pelicula);
+    }
+
 
 
 

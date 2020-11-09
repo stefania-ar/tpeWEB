@@ -36,7 +36,7 @@ class ViewPeliculas{
         $this->smarty->display('templates/viewAllMovies.tpl');
     }
 
-    function onlyMovies($peliculas, $type){
+    function onlyMovies($peliculas, $type, $user){
         $this->smarty->assign('title_header', $this->title);
         $this->smarty->assign('peliculas', $peliculas);
         $this->smarty->assign('titulo', "Título");
@@ -50,6 +50,7 @@ class ViewPeliculas{
         $this->smarty->assign('detalle', "Ver detalle");
         $this->smarty->assign('home', "HOME");
         $this->smarty->assign('type', $type);
+        $this->smarty->assign('user', $user);
 
         $this->smarty->display('templates/onlyMovies.tpl');
     }

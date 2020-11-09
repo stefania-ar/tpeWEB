@@ -1,12 +1,18 @@
 {include file="header.tpl"}
 
-{foreach $peliculas as $pelicula}
+    {foreach $peliculas as $pelicula}
 
-    <form action="editarDesdeForm/{$pelicula->id}" method="post">
-        <input type="text" name="title" placeholder="inserte titulo" value="{$pelicula->titulo}">
-        <input type="number" name="anio" placeholder="inserte año" value="{$pelicula->anio}">
-{/foreach}
+        <form action="editarDesdeForm/{$pelicula->id}" method="post">
+            <input type="text" name="title" placeholder="inserte titulo" value="{$pelicula->titulo}">
+            <input type="number" name="anio" placeholder="inserte año" value="{$pelicula->anio}">
+    {/foreach}
+        
         <select name="pais" >
+        {foreach $peliculas as $pelicula}
+            {if ($pelicula->pais) eq ($pelicula->pais)}
+                <option value="{$pelicula->pais}" selected="{$pelicula->pais}">{$pelicula->pais}</option>
+            {/if}
+        {/foreach}
             <option value="Argentina">Argentina</option>
             <option value="Estados Unidos">Estados Unidos</option>
             <option value="Chile">Chile</option>
@@ -19,8 +25,12 @@
         
             <input type="number" name="calif" placeholder="inserte calficacion" value="{$pelicula->calificacion}">
         {/foreach}
+
         <select name="genero" >
             {foreach $generos as $genero} 
+                {if ($genero->id_genero) eq ($pelicula->id_genero)}
+                    <option value="{$genero->id_genero}" selected="{$genero->nombre}">{$genero->nombre}</option>
+                {/if} 
                 <option value={$genero->id_genero}>{$genero->nombre}</option>
             {/foreach}
             </select>

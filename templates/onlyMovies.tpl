@@ -22,12 +22,21 @@
                     <td>{$pelicula->nombre}</td>
                     <td>
                         <form action="elegirCalif/{$pelicula->id}" method="post">
-                            <select name="calificacion" id="">
-                                <option value="1">UNO</option>
-                                <option value="2">DOS</option>
-                                <option value="3">TRES</option>
-                                <option value="4">CUATRO</option>
-                                <option value="5">CINCO</option>
+                        
+                            <select name="score" id="">
+                                 
+                                {foreach $scores as $score}
+                                    
+                                    {for $i=0 to 5}
+                                        {if ($score->puntuacion) eq $i && $score->id_pelicula eq $pelicula->id}  
+                                            <option value="{$score->puntuacion}" selected="{$score->puntuacion}">{$puntuaciones.$i}</option>  
+                                        {/if}                       
+                                        <option value={$i}>{$puntuaciones.$i}</option>
+                                    {/for}
+                                {/foreach}    
+                                    
+                                
+                                
                             </select>
                             <button type="submit">Enviar Calificacion</button>
                         </form>

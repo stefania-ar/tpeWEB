@@ -36,7 +36,7 @@ class ViewPeliculas{
         $this->smarty->display('templates/viewAllMovies.tpl');
     }
 
-    function onlyMovies($peliculas, $type, $user){
+    function onlyMovies($peliculas, $type, $user, $scores){
         $this->smarty->assign('title_header', $this->title);
         $this->smarty->assign('peliculas', $peliculas);
         $this->smarty->assign('titulo', "Título");
@@ -51,6 +51,14 @@ class ViewPeliculas{
         $this->smarty->assign('home', "HOME");
         $this->smarty->assign('type', $type);
         $this->smarty->assign('user', $user);
+        $this->smarty->assign('scores', $scores); 
+        $this->smarty->assign('puntuaciones', array( "0" =>"SELECT",
+                                                    "1" =>"UNO", 
+                                                    "2" => "DOS", 
+                                                    "3" => "TRES",
+                                                    "4"=> "CUATRO",
+                                                    "5"=> "CINCO"
+                                                        ));
 
         $this->smarty->display('templates/onlyMovies.tpl');
     }

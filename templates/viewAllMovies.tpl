@@ -24,5 +24,11 @@
         </tbody>    
     </table>
 
+    <div>
+        <ul>
+            
+        </ul>
+    </div>
+
 {include file="button_home.tpl"}
 {include file="footer.tpl"}        

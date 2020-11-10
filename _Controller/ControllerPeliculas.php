@@ -5,6 +5,7 @@ require_once './_View/ViewPeliculas.php';
 require_once './_View/ViewUser.php';
 require_once './_Model/ModelUser.php';
 require_once './_Model/ModelGeneros.php';
+require_once './_Model/ModelPuntuaciones.php';
 
 class ControllerPeliculas{
 
@@ -13,6 +14,7 @@ class ControllerPeliculas{
     private $viewUser;
     private $modelUser;
     private $modelGeneros;
+    private $modelPuntuaciones;
 
     function __construct(){
         $this->model= new ModelPeliculas();
@@ -20,6 +22,7 @@ class ControllerPeliculas{
         $this->viewUser= new ViewUser();
         $this->modelUser= new ModelUser();
         $this->modelGeneros= new ModelGeneros();
+        $this->modelPuntuaciones= new modelPuntuaciones();
     }
 
     function home (){
@@ -72,13 +75,32 @@ class ControllerPeliculas{
         } else $this->view->showError("Complete los campos para continuar");
         
     }
-
+     function auxx(){
+        $puntuaciones = array( 
+            "UNO" => 1, 
+            "DOS" => 2, 
+            "TRES" => 3,
+            "CUATRO"=> 4,
+            "CINCO"=> 5
+        ); 
+        return $puntuaciones;
+        
+    }
     function viewAllMovies(){
         $peliculas=$this->model->selectAllTable();
         $user=$this->checkUser();
         $type=$this->checkType();
+
+        $user=$_SESSION['USER'];
+        $userDB=$this->modelUser->getUser($user);
+
+        $idUSER=$userDB->id;
+        $scores=$this->modelPuntuaciones->getScoresByUser($idUSER);
+        $array= $this->auxx();
+    
+        $this->view->onlyMovies($peliculas, $type, $user,$scores);
         
-        $this->view->onlyMovies($peliculas, $type, $user);
+        
     }
     
     function viewAllGenres(){
@@ -215,6 +237,29 @@ class ControllerPeliculas{
     function shownum(){
         $c=$this->model->getCapacidad();
         $this->view->showcap($c);
+    }
+
+    function NewScore($params=null){
+        $this->checkLogin();        
+        $id_pelicula= $params [':ID'];
+        $scorefromPost= $_POST['score'];
+
+        $user=$_SESSION['USER'];
+
+        $userDB=$this->modelUser->getUser($user);
+
+        $idUSER=$userDB->id;
+        $score=$this->modelPuntuaciones->getScoreByUser($idUSER,$id_pelicula);
+
+        if($score == false){
+            $this->modelPuntuaciones->insertScore($scorefromPost, $id_pelicula, $idUSER);
+        }
+        elseif($score->puntuacion>0){
+            $this->modelPuntuaciones->updateScore($scorefromPost, $score->id);
+        }
+        #$user->$this->modelUser->getUserByID($id){
+        
+        $this->view->moviesLocation();
     }
 }
 

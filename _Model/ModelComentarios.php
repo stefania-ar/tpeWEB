@@ -28,5 +28,6 @@ class ModelComentarios{
     function insertComment($comentario, $id_usuario, $id_pelicula){
         $sentencia=$this->db->prepare("INSERT INTO comentarios(comentario, id_usuario, id_pelicula) VALUES(?,?,?)");
         $sentencia->execute(array($comentario, $id_usuario, $id_pelicula));
+        return LAST_INSERT_ID();
     }
 }

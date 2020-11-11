@@ -32,6 +32,8 @@ class ViewPeliculas{
         $this->smarty->assign('Director_a', "Director/a");
         $this->smarty->assign('Calificacion', "Calificación");
         $this->smarty->assign('home', "HOME");
+        $this->smarty->assign('com', "Comentarios");
+
 
         $this->smarty->display('templates/viewAllMovies.tpl');
     }

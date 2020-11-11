@@ -1,4 +1,7 @@
 {include file="header.tpl"}
+{include file="button_home.tpl"}
+<section class="row">
+
     <table>
            <thead>
                <tr>
@@ -23,12 +26,21 @@
         {/foreach}
         </tbody>    
     </table>
+    
+    <div class="apartado">
+        <h1 class="apartado">{$com}</h1>
+    
+        <ul id="list_comentarios">
 
-    <div>
-        <ul>
-            
         </ul>
     </div>
+   
+</section>
 
-{include file="button_home.tpl"}
+<form action="" method="post" class="column" id="formulario_coment">
+    <input type="text" placeholder="escriba su comentario" id="input_comentario" class="expand">
+    <button type="submit">ENVIAR COMENTARIO</button>
+</form>
+
+<script src="./js/renderComentarios.js"></script>    
 {include file="footer.tpl"}        

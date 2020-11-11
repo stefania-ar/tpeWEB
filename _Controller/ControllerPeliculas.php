@@ -88,17 +88,24 @@ class ControllerPeliculas{
     }
     function viewAllMovies(){
         $peliculas=$this->model->selectAllTable();
-        $user=$this->checkUser();
         $type=$this->checkType();
 
-        $user=$_SESSION['USER'];
-        $userDB=$this->modelUser->getUser($user);
+        if(isset($_SESSION['USER'])){
+            $user=$_SESSION['USER'];
+            $userDB=$this->modelUser->getUser($user);
 
-        $idUSER=$userDB->id;
-        $scores=$this->modelPuntuaciones->getScoresByUser($idUSER);
-        $array= $this->auxx();
-    
-        $this->view->onlyMovies($peliculas, $type, $user,$scores);
+            $idUSER=$userDB->id;
+            $scores=$this->modelPuntuaciones->getScoresByUser($idUSER);
+            $array= $this->auxx();
+        
+            $this->view->onlyMovies($peliculas, $type, $user,$scores);
+        }else {
+            $user=null;
+            $type=null;
+            $scores=null;
+            $this->view->onlyMovies($peliculas, $type, $user,$scores);
+        }
+        
         
         
     }
@@ -230,8 +237,8 @@ class ControllerPeliculas{
 
     function showDetail($params=null){
         $id= $params [':ID'];
-        $peliculas=$this->model->returnMovieByID($id);
-        $this->view->viewAllMovies($peliculas);
+        $pelicula=$this->model->returnMovieByID($id);
+        $this->view->viewAllMovies($pelicula);
     }
 
     function shownum(){

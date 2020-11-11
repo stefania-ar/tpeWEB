@@ -15,9 +15,10 @@ class CommentsControllerApi extends ApiController {
     function getComments($params=null){
         $comments=$this->modelComentarios->getComments();
         $this->view->response($comments, 200);
+        
     }
 
-    function getComment($params=null){
+    public function getComment($params=null){
         $id= $params [':ID'];
         $comen=$this->modelComentarios->getComment($id);
 

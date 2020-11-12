@@ -96,7 +96,6 @@ class ControllerPeliculas{
 
             $idUSER=$userDB->id;
             $scores=$this->modelPuntuaciones->getScoresByUser($idUSER);
-            $array= $this->auxx();
         
             $this->view->onlyMovies($peliculas, $type, $user,$scores);
         }else {
@@ -238,7 +237,20 @@ class ControllerPeliculas{
     function showDetail($params=null){
         $id= $params [':ID'];
         $pelicula=$this->model->returnMovieByID($id);
-        $this->view->viewAllMovies($pelicula);
+        
+        if(session_status()== PHP_SESSION_NONE){
+            session_start();
+        }
+
+        if(isset($_SESSION['USER'])){
+            $user=$_SESSION['USER'];
+            $userDB=$this->modelUser->getUser($user);
+            $this->view->viewAllMovies($pelicula, $userDB);
+        }else{
+             $user=null;
+             $this->view->viewAllMovies($pelicula, $user);
+        }
+       
     }
 
     function shownum(){

@@ -37,10 +37,15 @@
    
 </section>
 
-<form action="" method="post" class="column" id="formulario_coment">
-    <input type="text" placeholder="escriba su comentario" id="input_comentario" class="expand">
-    <button type="submit">ENVIAR COMENTARIO</button>
-</form>
+{if $user != null}
+    <form action="" method="post" class="column" id="formulario_coment">
+        <input type="text" placeholder="escriba su comentario" id="input_comentario" class="expand">
+        <input type="number" name="id_user" hidden value="{$user->id}">
+        <input type="text" name="id_pelicula" hidden value="{$pelicula->id}">
+        <button type="submit">ENVIAR COMENTARIO</button>
+    </form>
+{/if}
+
 
 <script src="./js/renderComentarios.js"></script>    
 {include file="footer.tpl"}        

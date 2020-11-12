@@ -22,7 +22,7 @@ class ViewPeliculas{
         header("Location: ".BASE_URL."showAll");
     }
 
-    function viewAllMovies($peliculas){
+    function viewAllMovies($peliculas, $user){
         $this->smarty->assign('title_header', $this->title);
         $this->smarty->assign('peliculas', $peliculas);
         $this->smarty->assign('titulo', "Título");
@@ -33,6 +33,7 @@ class ViewPeliculas{
         $this->smarty->assign('Calificacion', "Calificación");
         $this->smarty->assign('home', "HOME");
         $this->smarty->assign('com', "Comentarios");
+        $this->smarty->assign('user', $user);
 
 
         $this->smarty->display('templates/viewAllMovies.tpl');

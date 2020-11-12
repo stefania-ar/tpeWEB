@@ -13,6 +13,7 @@ class CommentsControllerApi extends ApiController {
     }
 
     function getComments($params=null){
+        
         $comments=$this->modelComentarios->getComments();
         $this->view->response($comments, 200);
         
@@ -41,7 +42,14 @@ class CommentsControllerApi extends ApiController {
     function insertComment($params=null){
         $body=$this->getData();
 
-        $this->modelComentarios->insertComment($body->comentario, $body->id_usuario, $body->id_pelicula);
+        $id=$this->modelComentarios->insertComment($body->comentario, $body->id_usuario, $body->id_pelicula);
+
+        if(!empty($id)){
+            $this->view->response($this->modelComentarios->getComment($id), 200); 
+         }
+         else{
+             $this->view->response("No se pudo insertar la tarea", 404); 
+         }
     }
 
 

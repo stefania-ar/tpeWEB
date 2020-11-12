@@ -13,8 +13,15 @@
   flex-direction: column;
 }
 
+.select{
+  min-width: 100vh;
+  min-height: 5vh;
+  max-width: 100vh;
+  margin-bottom: 2vh;
+}
+
 .apartado{
-  margin: 0vh 3vh 3vh 23vh;
+  margin: 0vh 3vh 0vh 23vh;
   border-color: #111;
   padding: 2vh 20vh 2vh 2vh;
   border-width: thin;

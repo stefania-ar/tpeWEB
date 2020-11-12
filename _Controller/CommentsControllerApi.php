@@ -13,8 +13,8 @@ class CommentsControllerApi extends ApiController {
     }
 
     function getComments($params=null){
-        
-        $comments=$this->modelComentarios->getComments();
+        $id= $params [':ID'];
+        $comments=$this->modelComentarios->getComments($id);
         $this->view->response($comments, 200);
         
     }

@@ -8,9 +8,9 @@ class ModelComentarios{
         $this->db= new PDO('mysql:host=localhost;' .'dbname=basepeliculas;charset=utf8' , 'root', '');
     }
 
-    function getComments(){
-        $sentencia= $this->db->prepare("SELECT * FROM comentarios WHERE id_pelicula=24");
-        $sentencia->execute();
+    function getComments($id){
+        $sentencia= $this->db->prepare("SELECT * FROM comentarios WHERE id_pelicula=?");
+        $sentencia->execute(array($id));
         return $comen=$sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 

@@ -13,8 +13,11 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 function getComentarios(){
+    let ID= document.getElementById("id_peli").value;
+    const URL= "api/comentarios/";
     console.log("hola");
-    fetch('api/comentarios')
+
+    fetch(URL+ID)
     .then(response => response.json())
     .then(comentarios=> renderComentarios(comentarios))
     .catch(error =>console.log(error));
@@ -23,10 +26,11 @@ function getComentarios(){
 
 
 function insertComentario(){
+    console.log("hizo el comen")
     let comentario={
         comentario: document.getElementById("input_comentario").value,
-        id_usuario: 3,
-        id_pelicula: 24
+        id_usuario: document.getElementById("input_usuario").value,
+        id_pelicula: document.getElementById("id_peli").value
 
     }
 

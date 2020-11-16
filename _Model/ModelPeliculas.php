@@ -8,10 +8,15 @@ class ModelPeliculas{
         $this->db= new PDO('mysql:host=localhost;' .'dbname=basepeliculas;charset=utf8' , 'root', '');
     }
 
-    function insert($title, $anio, $pais, $director_a, $calif, $genre){
-        $sentencia=$this->db->prepare(" INSERT INTO peliculas(titulo, anio, pais, director_a, calificacion, id_genero) 
-                VALUES (?,?,?,?,?,?)");
-        $sentencia-> execute(array($title, $anio, $pais, $director_a, $calif, $genre));
+    function insert($title, $anio, $pais, $director_a, $calif, $genre, $fileTemp=null){
+        $fileName=basename($_FILES["input_img"]["name"]);
+        $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_img']['name'], PATHINFO_EXTENSION));
+        
+        move_uploaded_file($fileTemp, $filepath);
+
+        $sentencia=$this->db->prepare(" INSERT INTO peliculas(titulo, anio, pais, director_a, calificacion, id_genero, imagen) 
+                VALUES (?,?,?,?,?,?,?)");
+        $sentencia-> execute(array($title, $anio, $pais, $director_a, $calif, $genre, $filepath));
     }
     
     function selectAllTable(){    //LIMIT 3 te devuelve solo las primeras 3

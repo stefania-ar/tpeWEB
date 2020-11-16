@@ -37,23 +37,25 @@
    
 </section>
 
-{if $user != null}
+
     <form action="" method="post" class="column" id="formulario_coment">
         <label for="">Ingrese un comentario</label>
         <input type="text" placeholder="escriba su comentario" id="input_comentario" class="expand">
         <label for="">Ingrese su valoracion</label>
-        <select name="" id="" class="select">
+        <select name="input_puntuacion" id="input_puntuacion" class="select">
             <option value="1">UNO</option>
             <option value="2">DOS</option>
             <option value="3">TRES</option>
             <option value="4">CUATRO</option>
             <option value="5">CINCO</option>
         </select>
-        <input type="number" name="id_user" hidden value="{$user->id}" id="input_usuario">
+        {if $user != null}
+            <input type="number" name="id_user" hidden value="{$user->id}" id="input_usuario">
+        {/if}
         <input type="text" name="id_pelicula" hidden value="{$pelicula->id}" id="id_peli">
         <button type="submit">ENVIAR COMENTARIO</button>
     </form>
-{/if}
+
 
 
 <script src="./js/renderComentarios.js"></script>    

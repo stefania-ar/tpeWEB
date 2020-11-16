@@ -3,7 +3,7 @@
 
 <h1>{$tituloH}</h1>
 
-        <form action="insert" method="post">
+        <form action="insert" method="post" enctype="multipart/form-data">
         <input class="cssGeneral" type="text" name="title" placeholder="inserte titulo">
             <input class="cssGeneral" type="number" name="anio" placeholder="inserte año">
             <select class="cssGeneral" name="pais" >
@@ -22,6 +22,7 @@
                     <option value={$genero->id_genero}>{$genero->nombre}</option>
                 {/foreach}
                 </select>
+            <input class="cssGeneral" type="file" name="input_img" id="imageToUpload">
             <button type="submit">{$Enviar}</button>
         </form>
 

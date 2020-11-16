@@ -40,19 +40,38 @@ class CommentsControllerApi extends ApiController {
     }
 
     function insertComment($params=null){
-        $body=$this->getData();
+        $status=$this->auth();
 
-        $id=$this->modelComentarios->insertComment($body->comentario, $body->id_usuario, $body->id_pelicula);
+        if($status== true){
+            $body=$this->getData();
+            
+            if(!empty($body->comentario)){
+                $id=$this->modelComentarios->insertComment($body->comentario, $body->puntuacion, $body->id_usuario, $body->id_pelicula);   
+                if(!empty($id)){
+                    $this->view->response($this->modelComentarios->getComment($id), 200); 
+                }
+                else{
+                    $this->view->response("No se pudo insertar la tarea", 404); 
+                }
+            }else{
+                $this->view->response("Escriba un comentario", 501);
+            }
 
-        if(!empty($id)){
-            $this->view->response($this->modelComentarios->getComment($id), 200); 
-         }
-         else{
-             $this->view->response("No se pudo insertar la tarea", 404); 
-         }
+        }else {
+            $this->view->response("No está loggeado, ingrese para postear un comentario", 404);
+        }
+        
     }
 
-
+    function auth($params=null){
+        if(session_status()== PHP_SESSION_NONE){
+            session_start();
+        }
+        if(isset($_SESSION['USER'])){
+            return true;
+        }
+        return false;
+    }
 
 
 

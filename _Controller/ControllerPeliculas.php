@@ -5,7 +5,6 @@ require_once './_View/ViewPeliculas.php';
 require_once './_View/ViewUser.php';
 require_once './_Model/ModelUser.php';
 require_once './_Model/ModelGeneros.php';
-require_once './_Model/ModelPuntuaciones.php';
 
 class ControllerPeliculas{
 
@@ -14,7 +13,6 @@ class ControllerPeliculas{
     private $viewUser;
     private $modelUser;
     private $modelGeneros;
-    private $modelPuntuaciones;
 
     function __construct(){
         $this->model= new ModelPeliculas();
@@ -22,7 +20,6 @@ class ControllerPeliculas{
         $this->viewUser= new ViewUser();
         $this->modelUser= new ModelUser();
         $this->modelGeneros= new ModelGeneros();
-        $this->modelPuntuaciones= new modelPuntuaciones();
     }
 
     function home (){
@@ -56,8 +53,8 @@ class ControllerPeliculas{
         if(!isset($_SESSION['TYPE'])){
             $this->viewUser->render_login();
                 die();
-        }else if ( (isset($_SESSION['TYPE'])) && ($_SESSION['TYPE']!=1) ) {
-                $this->viewUser->render_login();
+        }else if ( (isset($_SESSION['TYPE'])) && ($_SESSION['TYPE']!=1) ) {#es distinto de 1 porque si lo pongo igual no sé a donde llevarlo
+                $this->viewUser->render_login();                            #porque viene de muchos lugares
                 die();
             
         }
@@ -70,8 +67,20 @@ class ControllerPeliculas{
         $genre=$_POST['genero'];
         if(isset($_POST['title']) && ($_POST['title'] !=null)&&
             ($_POST['anio']) && ($_POST['pais']) && ($_POST['director_a']) && ($_POST['calif']) && ($genre) ){
-                $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$genre);
-                $this->view->homeLocation();
+
+                if($_FILES['input_img']['type'] == "image/jpg" || $_FILES['input_img']['type'] == "image/jpeg" || 
+                $_FILES['input_img']['type'] == "image/png" ) {
+                    $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],
+                        $_POST['director_a'],$_POST['calif'],$genre,$_FILES['input_img']['tmp_name']);
+                    $this->view->homeLocation();
+                }else{
+                    $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],
+                        $_POST['director_a'],$_POST['calif'],$genre);
+                    $this->view->homeLocation();
+                }
+                
+             
+               
         } else $this->view->showError("Complete los campos para continuar");
         
     }
@@ -95,14 +104,13 @@ class ControllerPeliculas{
             $userDB=$this->modelUser->getUser($user);
 
             $idUSER=$userDB->id;
-            $scores=$this->modelPuntuaciones->getScoresByUser($idUSER);
         
-            $this->view->onlyMovies($peliculas, $type, $user,$scores);
+            $this->view->onlyMovies($peliculas, $type, $user);
         }else {
             $user=null;
             $type=null;
             $scores=null;
-            $this->view->onlyMovies($peliculas, $type, $user,$scores);
+            $this->view->onlyMovies($peliculas, $type, $user);
         }
         
         
@@ -258,28 +266,6 @@ class ControllerPeliculas{
         $this->view->showcap($c);
     }
 
-    function NewScore($params=null){
-        $this->checkLogin();        
-        $id_pelicula= $params [':ID'];
-        $scorefromPost= $_POST['score'];
-
-        $user=$_SESSION['USER'];
-
-        $userDB=$this->modelUser->getUser($user);
-
-        $idUSER=$userDB->id;
-        $score=$this->modelPuntuaciones->getScoreByUser($idUSER,$id_pelicula);
-
-        if($score == false){
-            $this->modelPuntuaciones->insertScore($scorefromPost, $id_pelicula, $idUSER);
-        }
-        elseif($score->puntuacion>0){
-            $this->modelPuntuaciones->updateScore($scorefromPost, $score->id);
-        }
-        #$user->$this->modelUser->getUserByID($id){
-        
-        $this->view->moviesLocation();
-    }
 }
 
 

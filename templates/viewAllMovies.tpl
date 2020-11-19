@@ -11,6 +11,7 @@
                    <th>{$Director_a}</th>
                    <th>{$Calificacion}</th>
                    <th>{$Genero}</th>
+                   <th>Imagen</th>
                </tr>
            </thead>
        <tbody>
@@ -22,6 +23,10 @@
                     <td>{$pelicula->director_a}</td>
                     <td>{$pelicula->calificacion}</td>
                     <td>{$pelicula->nombre}</td>
+                    {if $pelicula->imagen != null}
+                        <td><img src="{$pelicula->imagen}" alt="pelicula" srcset=""></td>
+                    {/if}
+                    <td></td>
                 </tr>
         {/foreach}
         </tbody>    

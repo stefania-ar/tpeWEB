@@ -51,7 +51,7 @@ class CommentsControllerApi extends ApiController {
                     $this->view->response($this->modelComentarios->getComment($id), 200); 
                 }
                 else{
-                    $this->view->response("No se pudo insertar la tarea", 404); 
+                    $this->view->response("No se pudo insertar el comentario", 404); 
                 }
             }else{
                 $this->view->response("Escriba un comentario", 501);

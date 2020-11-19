@@ -64,7 +64,8 @@ function renderComentarios(comen) {
     comen.forEach(com => {
         let comentario=`<div class="small_row"><li>${com.comentario}</li>`;
         let button= `<button id="id_boton${com.id}">borrar</button></div>`;
-        lista.innerHTML+= comentario + button;
+        let puntuacion= `${com.puntuacion}`;
+        lista.innerHTML+= comentario +"- Puntuacion:"+ puntuacion + button;
         
         
     });

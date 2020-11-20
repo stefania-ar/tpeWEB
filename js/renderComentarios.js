@@ -1,9 +1,9 @@
-'use strict';
 
 document.addEventListener("DOMContentLoaded", function(){
-    getComentarios();
-    console.log("hola");
+    
     console.log(document.getElementsByTagName("button"));
+
+    getComentarios();
 
     document.getElementById("formulario_coment").addEventListener("submit", function(e){
         e.preventDefault();
@@ -11,24 +11,20 @@ document.addEventListener("DOMContentLoaded", function(){
         getComentarios();
         console.log("hice el get");
     });
-
-    document.getElementById("id_boton127").addEventListener("click", function(){
-        deleteComentario();
-    });
+    
 });
+
+
 
 function getComentarios(){
     let ID= document.getElementById("id_peli").value;
     const URL= "api/comentarios/";
-    console.log("hola");
 
     fetch(URL+ID)
     .then(response => response.json())
     .then(comentarios=> renderComentarios(comentarios))
     .catch(error =>console.log(error));
 }
-
-
 
 function insertComentario(){
     console.log("hizo el comen")
@@ -47,7 +43,10 @@ function insertComentario(){
     })
     .catch(error =>console.log(error));
 
+    
+    getComentarios();
 }
+
 function deleteComentario(){
     const URL="api/comentarios/";
     let id_boton= document.getElementById("id_boton${com.id}");
@@ -65,8 +64,18 @@ function renderComentarios(comen) {
         let comentario=`<div class="small_row"><li>${com.comentario}</li>`;
         let button= `<button id="id_boton${com.id}">borrar</button></div>`;
         let puntuacion= `${com.puntuacion}`;
-        lista.innerHTML+= comentario +"- Puntuacion:"+ puntuacion + button;
+        lista.innerHTML+= comentario +"- Puntuacion: "+ puntuacion + button;
         
         
     });
+    
+    
+
 }
+let variable= document.getElementById("id_boton60");
+console.log(variable);
+    
+
+
+console.log("final");
+

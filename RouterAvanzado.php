@@ -26,6 +26,8 @@ $r->addRoute("editarDesdeForm/:ID", "POST", "ControllerPeliculas", "editMovie");
 $r->addRoute("detalle/:ID", "GET", "ControllerPeliculas", "showDetail");
 $r->addRoute("numero", "GET", "ControllerPeliculas", "shownum");
 $r->addRoute("elegirCalif/:ID", "POST", "ControllerPeliculas", "NewScore");
+$r->addRoute("buscarAvanzado", "POST", "ControllerPeliculas", "searchByName");
+
 
 //GENERO
 $r->addRoute("borrar_genero/:ID", "GET", "ControllerPeliculas", "deleteGenre");

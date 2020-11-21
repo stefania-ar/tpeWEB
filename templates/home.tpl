@@ -89,4 +89,13 @@
             <button type="submit">{$Enviar}</button>
         </form>
     </div>
+
+    <form action="buscarAvanzado" method="post">
+            <label for="nombre">Nombre</label>
+            <input class="cssGeneral" type="text" name="nombrePelicula2">
+
+            <label for="año">{$anio}</label>
+            <input class="cssGeneral" type="number" name="anio2">
+            <button type="submit">{$Enviar}</button>
+        </form>
 {include file="footer.tpl"}        

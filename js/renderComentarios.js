@@ -1,20 +1,36 @@
 
 document.addEventListener("DOMContentLoaded", function(){
     
-    console.log(document.getElementsByTagName("button"));
-
-    getComentarios();
-
     document.getElementById("formulario_coment").addEventListener("submit", function(e){
         e.preventDefault();
         insertComentario();
         getComentarios();
         console.log("hice el get");
     });
+
+    getComentarios();
+  //deleteComentario();
+
     
+    let variable= document.getElementsByName("boton_borrar");
+        console.log(variable);
+
+        const URL="api/comentarios/";
+
+        for (let i = 0; i < variable.length; i++) {
+            console.log(variable);
+            const element = variable[i].addEventListener('click',consola());
+            
+            
+        }
+        if(variable.click){
+            consola();
+        }
+
+
 });
 
-
+    
 
 function getComentarios(){
     let ID= document.getElementById("id_peli").value;
@@ -48,11 +64,19 @@ function insertComentario(){
 }
 
 function deleteComentario(){
-    const URL="api/comentarios/";
-    let id_boton= document.getElementById("id_boton${com.id}");
-    console.log(id_boton);
+    let variable= document.getElementsByName("boton_borrar");
+    console.log(variable);
 
-    
+    const URL="api/comentarios/";
+    if(variable.onClick){
+        consola();
+    }
+
+}
+
+function consola(){
+    alert("hola");
+    console.log("delete");
 }
 
 function renderComentarios(comen) {
@@ -62,20 +86,22 @@ function renderComentarios(comen) {
      
     comen.forEach(com => {
         let comentario=`<div class="small_row"><li>${com.comentario}</li>`;
-        let button= `<button id="id_boton${com.id}">borrar</button></div>`;
+        let button= `<button name="boton_borrar" id="id_boton${com.id}">borrar</button>`;
         let puntuacion= `${com.puntuacion}`;
-        lista.innerHTML+= comentario +"- Puntuacion: "+ puntuacion + button;
-        
-        
+        lista.innerHTML+= comentario +"- Puntuacion: "+ puntuacion + button +`</div>`;
+
     });
-    
-    
 
 }
-let variable= document.getElementById("id_boton60");
-console.log(variable);
-    
 
+    
+function hola(){
+    fetch(URL+parte, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'}
+})
+.catch(error =>console.log(error));
+}
 
 console.log("final");
 

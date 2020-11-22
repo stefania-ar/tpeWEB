@@ -5,6 +5,7 @@ require_once './_View/ViewPeliculas.php';
 require_once './_View/ViewUser.php';
 require_once './_Model/ModelUser.php';
 require_once './_Model/ModelGeneros.php';
+require_once './helpers/auth.php';
 
 class ControllerPeliculas{
 
@@ -13,6 +14,7 @@ class ControllerPeliculas{
     private $viewUser;
     private $modelUser;
     private $modelGeneros;
+    private $helper;
 
     function __construct(){
         $this->model= new ModelPeliculas();
@@ -20,6 +22,7 @@ class ControllerPeliculas{
         $this->viewUser= new ViewUser();
         $this->modelUser= new ModelUser();
         $this->modelGeneros= new ModelGeneros();
+        $this->helper= new helper();
     }
 
     function home (){
@@ -84,17 +87,7 @@ class ControllerPeliculas{
         } else $this->view->showError("Complete los campos para continuar");
         
     }
-     function auxx(){
-        $puntuaciones = array( 
-            "UNO" => 1, 
-            "DOS" => 2, 
-            "TRES" => 3,
-            "CUATRO"=> 4,
-            "CINCO"=> 5
-        ); 
-        return $puntuaciones;
-        
-    }
+     
     function viewAllMovies(){
         $peliculas=$this->model->selectAllTable();
         $type=$this->checkType();
@@ -134,9 +127,10 @@ class ControllerPeliculas{
     }
 
     function searchByName(){
-        $nombre= $_POST['nombrePelicula'];
-        $peliculas=$this->model->returnName($nombre);
-        $this->view->viewAllMovies($peliculas);
+        $titulo= $_POST['nombrePelicula'];
+        $parametro= $_POST['parametro_nombre'];
+        $peliculas=$this->model->search($parametro, $titulo);
+        $this->view->renderResults($peliculas);
     }
 
     function searchByYear(){
@@ -144,7 +138,7 @@ class ControllerPeliculas{
 
         if(isset($anio)){
             $peliculas=$this->model->returnYear($anio);
-            $this->view->viewAllMovies($peliculas);
+            $this->view->renderResults($peliculas);
         }
     }
 
@@ -153,7 +147,7 @@ class ControllerPeliculas{
 
         if(isset($pais)){
             $peliculas=$this->model->returnCountry($pais);
-            $this->view->viewAllMovies($peliculas);
+            $this->view->renderResults($peliculas);
         }
     }
 
@@ -162,7 +156,7 @@ class ControllerPeliculas{
 
         if(isset($direccion)){
             $peliculas=$this->model->returnDirection($direccion);
-            $this->view->viewAllMovies($peliculas);
+            $this->view->renderResults($peliculas);
         }
     }
 
@@ -171,7 +165,7 @@ class ControllerPeliculas{
 
         if(isset($calif)){
             $peliculas=$this->model->returnCalif($calif);
-            $this->view->viewAllMovies($peliculas);
+            $this->view->renderResults($peliculas);
         }
     }
 
@@ -246,24 +240,16 @@ class ControllerPeliculas{
         $id= $params [':ID'];
         $pelicula=$this->model->returnMovieByID($id);
         
-        if(session_status()== PHP_SESSION_NONE){
-            session_start();
-        }
-
-        if(isset($_SESSION['USER'])){
-            $user=$_SESSION['USER'];
-            $userDB=$this->modelUser->getUser($user);
-            $this->view->viewAllMovies($pelicula, $userDB);
-        }else{
-             $user=null;
-             $this->view->viewAllMovies($pelicula, $user);
-        }
-       
+        $user=$this->helper->returnUser();
+        $this->view->viewAllMovies($pelicula, $user);
     }
 
-    function shownum(){
-        $c=$this->model->getCapacidad();
-        $this->view->showcap($c);
+    function advancedSearch(){
+        $title = $_POST['nombrePelicula2'];
+        $anio=$_POST['anio2'];
+        $peliculas=$this->model->advancedSearch($title, $anio);
+
+        $this->view->renderResults($peliculas);
     }
 
 }

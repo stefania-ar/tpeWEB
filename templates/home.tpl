@@ -55,6 +55,7 @@
         <form action="buscarPorNombre" method="post">
             <label for="nombre">Nombre</label>
             <input class="cssGeneral" type="text" name="nombrePelicula">
+            <input type="text" hidden name="parametro_nombre" value="titulo">
             <button type="submit">{$Enviar}</button>
         </form>
 
@@ -93,6 +94,7 @@
     <form action="buscarAvanzado" method="post">
             <label for="nombre">Nombre</label>
             <input class="cssGeneral" type="text" name="nombrePelicula2">
+            
 
             <label for="año">{$anio}</label>
             <input class="cssGeneral" type="number" name="anio2">

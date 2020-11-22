@@ -33,6 +33,12 @@ class ModelPeliculas{
         return $peliculas;
     }
 
+    function search($parametro, $valor) {
+
+        $sentencia=$this->db->prepare(" SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE `$parametro`=?");
+        $sentencia-> execute(array($valor));
+        return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
+    }
     function returnName($nombre){
         $sentencia=$this->db->prepare(" SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE `titulo`=?");
         $sentencia-> execute(array($nombre));
@@ -80,10 +86,49 @@ class ModelPeliculas{
     }
     
 
-    function getCapacidad(){
-        $sentencia=$this->db->prepare("SELECT COUNT * as total FROM peliculas");
-        $sentencia->execute();
-        return $capaci= $sentencia-> fetchAll(PDO::FETCH_OBJ);
+    function advancedSearch($title, $anio){
+        $UserSearch = "SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero ";
+
+        
+        $array = array();
+
+        if (!empty($title))  {
+            $array['title']= $title;
+        }
+        if (!empty($anio)){
+            $array['anio']=$anio;
+        }
+        
+
+        $longitud= count($array);
+        $ref=array_keys($array);
+        $last_key = end($ref);
+
+        $UserSearch = "SELECT * peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE ";
+        
+
+                foreach ($array as $key => $value)
+                {
+                    $UserSearch .= $key . ' LIKE %"' . $value . '"%';
+                    if ($last_key != $key) $UserSearch .= ' AND ';
+                    
+                }
+        $stmt=$this->db->prepare($UserSearch);
+
+        foreach ($array as $key => $value)
+        {
+           $stmt->bindValue($key, $value);
+            
+        }
+                
+        
+        var_dump($UserSearch);
+        
+        $stmt->execute(array($title));
+        var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
+        die();
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        
     }
 }
 

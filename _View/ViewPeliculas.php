@@ -140,4 +140,18 @@ class ViewPeliculas{
         $this->smarty->display('./templates/showError.tpl');
     }
 
+    function renderResults($peliculas){
+        $this->smarty->assign('title_header', $this->title);
+        $this->smarty->assign('peliculas', $peliculas);
+        $this->smarty->assign('titulo', "Título");
+        $this->smarty->assign('Anio', "Año");
+        $this->smarty->assign('Pais', "País");
+        $this->smarty->assign('Genero', "Género");
+        $this->smarty->assign('Director_a', "Director/a");
+        $this->smarty->assign('Calificacion', "Calificación");
+        $this->smarty->assign('home', "HOME");
+
+        $this->smarty->display('./templates/busquedas.tpl');
+    }
+
 }

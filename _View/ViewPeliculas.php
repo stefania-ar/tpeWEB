@@ -48,7 +48,7 @@ class ViewPeliculas{
         $this->smarty->assign('Genero', "Género");
         $this->smarty->assign('Director_a', "Director/a");
         $this->smarty->assign('Calificacion', "Calificación");
-        $this->smarty->assign('eliminar', "Eliminar");
+        $this->smarty->assign('eliminar', "Eliminar película");
         $this->smarty->assign('editar', "Editar");
         $this->smarty->assign('detalle', "Ver detalle");
         $this->smarty->assign('home', "HOME");

@@ -8,6 +8,7 @@
                    <th>{$Director_a}</th>
                    <th>{$Calificacion}</th>
                    <th>{$Genero}</th>
+                   <th>Imagen</th>
                    
                </tr>
            </thead>
@@ -21,13 +22,17 @@
                     <td>{$pelicula->calificacion}</td>
                     <td>{$pelicula->nombre}</td>
                     
+                    {if $pelicula->imagen != null}
+                        <td><img src="{$pelicula->imagen}" alt="pelicula" srcset=""></td>
+                    {else}
+                        <td></td>
+                    {/if}
+
                     {if $type eq true}
                         <td><button><a href="borrar/{$pelicula->id}"> {$eliminar}</a></button></td>
                         <td><button><a href="editar/{$pelicula->id}"> {$editar}</a></button></td>
                     {/if}
                         <td><button><a href="detalle/{$pelicula->id}"> {$detalle}</a></button></td>
-                    
-                        
                     
                 </tr>
         {/foreach}

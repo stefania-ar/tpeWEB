@@ -85,7 +85,7 @@ class ModelPeliculas{
     }
     
     function edit($title, $anio, $pais, $director_a, $calif, $genre, $id, $fileTemp=null){
-        if(isset($fileTemp)){
+        if(isset($fileTemp) && $fileTemp != null){
             $fileName=basename($_FILES["input_img"]["name"]);
             $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_img']['name'], PATHINFO_EXTENSION));
         

@@ -194,7 +194,6 @@ class ControllerPeliculas{
 
     function editMovie($params=null){
         $this->checkLogin();
-
         $id= $params [':ID'];
 
         if(isset($_POST['title']) && ($_POST['title'] !=null) && ($_POST['anio']) && ($_POST['pais']) && 
@@ -206,7 +205,7 @@ class ControllerPeliculas{
                     $_POST['genero'],$id,$_FILES['input_img']['tmp_name']);
                 }else {
                     $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],
-                    $id,$_FILES['input_img']['tmp_name']);
+                    $id);
                 }
                 
                 $this->view->moviesLocation();

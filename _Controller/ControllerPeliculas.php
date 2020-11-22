@@ -75,13 +75,12 @@ class ControllerPeliculas{
                 $_FILES['input_img']['type'] == "image/png" ) {
                     $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],
                         $_POST['director_a'],$_POST['calif'],$genre,$_FILES['input_img']['tmp_name']);
-                    $this->view->homeLocation();
+
                 }else{
                     $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],
                         $_POST['director_a'],$_POST['calif'],$genre);
-                    $this->view->homeLocation();
                 }
-                
+                $this->view->homeLocation();
              
                
         } else $this->view->showError("Complete los campos para continuar");
@@ -105,8 +104,6 @@ class ControllerPeliculas{
             $scores=null;
             $this->view->onlyMovies($peliculas, $type, $user);
         }
-        
-        
         
     }
     
@@ -202,7 +199,16 @@ class ControllerPeliculas{
 
         if(isset($_POST['title']) && ($_POST['title'] !=null) && ($_POST['anio']) && ($_POST['pais']) && 
             ($_POST['director_a']) && ($_POST['calif']) && ($_POST['genero'])){
-                $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
+
+                if($_FILES['input_img']['type'] == "image/jpg" || $_FILES['input_img']['type'] == "image/jpeg" || 
+                $_FILES['input_img']['type'] == "image/png" ) {
+                    $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],
+                    $_POST['genero'],$id,$_FILES['input_img']['tmp_name']);
+                }else {
+                    $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],
+                    $id,$_FILES['input_img']['tmp_name']);
+                }
+                
                 $this->view->moviesLocation();
 
         }else $this->view->showError("Complete los campos para continuar");

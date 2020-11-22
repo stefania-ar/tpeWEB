@@ -9,11 +9,15 @@ class ModelPeliculas{
     }
 
     function insert($title, $anio, $pais, $director_a, $calif, $genre, $fileTemp=null){
-        $fileName=basename($_FILES["input_img"]["name"]);
-        $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_img']['name'], PATHINFO_EXTENSION));
+        if(isset($fileTemp)){
+            $fileName=basename($_FILES["input_img"]["name"]);
+            $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_img']['name'], PATHINFO_EXTENSION));
         
-        move_uploaded_file($fileTemp, $filepath);
-
+            move_uploaded_file($fileTemp, $filepath);
+            
+        }else {
+            $filepath="";
+        }
         $sentencia=$this->db->prepare(" INSERT INTO peliculas(titulo, anio, pais, director_a, calificacion, id_genero, imagen) 
                 VALUES (?,?,?,?,?,?,?)");
         $sentencia-> execute(array($title, $anio, $pais, $director_a, $calif, $genre, $filepath));
@@ -80,9 +84,20 @@ class ModelPeliculas{
         return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
     }
     
-    function edit($title, $anio, $pais, $director_a, $calif, $genre, $id){
-        $sentencia=$this->db->prepare("UPDATE peliculas SET titulo=?, anio=?, pais=?, director_a=?, calificacion=?, id_genero=? WHERE id=?");
-        $sentencia-> execute(array($title, $anio, $pais, $director_a, $calif, $genre, $id));
+    function edit($title, $anio, $pais, $director_a, $calif, $genre, $id, $fileTemp=null){
+        if(isset($fileTemp)){
+            $fileName=basename($_FILES["input_img"]["name"]);
+            $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_img']['name'], PATHINFO_EXTENSION));
+        
+            move_uploaded_file($fileTemp, $filepath);
+            
+        }else {
+            //unlink($filepath);
+            $filepath="";
+        }
+        $sentencia=$this->db->prepare("UPDATE peliculas SET titulo=?, anio=?, pais=?, director_a=?, calificacion=?, id_genero=?, imagen=?
+                         WHERE id=?");
+        $sentencia-> execute(array($title, $anio, $pais, $director_a, $calif, $genre,$filepath, $id));
     }
     
 

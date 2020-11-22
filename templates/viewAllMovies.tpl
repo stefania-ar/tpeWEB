@@ -24,9 +24,10 @@
                     <td>{$pelicula->calificacion}</td>
                     <td>{$pelicula->nombre}</td>
                     {if $pelicula->imagen != null}
-                        <td><img src="{$pelicula->imagen}" alt="pelicula" srcset=""></td>
+                        <td><img src="{$pelicula->imagen}" alt="pelicula" srcset=""><button><a href="deleteImage/{$pelicula->id}">eliminar</a></button></td>
+                    {else}
+                        <td></td>
                     {/if}
-                    <td></td>
                 </tr>
         {/foreach}
         </tbody>    

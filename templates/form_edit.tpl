@@ -2,7 +2,7 @@
 
     {foreach $peliculas as $pelicula}
 
-        <form action="editarDesdeForm/{$pelicula->id}" method="post">
+        <form action="editarDesdeForm/{$pelicula->id}" method="post" enctype="multipart/form-data">
             <input type="text" name="title" placeholder="inserte titulo" value="{$pelicula->titulo}">
             <input type="number" name="anio" placeholder="inserte año" value="{$pelicula->anio}">
     {/foreach}
@@ -33,7 +33,13 @@
                 {/if} 
                 <option value={$genero->id_genero}>{$genero->nombre}</option>
             {/foreach}
-            </select>
+        </select>
+        {if $pelicula->imagen != null}
+            <input class="cssGeneral" type="file" name="input_img" id="imageToUpload" value="null">
+            {else}
+                <input class="cssGeneral" type="file" name="input_img" id="imageToUpload">
+        {/if}
+        
         <button type="submit">{$Enviar}</button>
     </form>
 

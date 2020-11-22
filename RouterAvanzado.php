@@ -27,6 +27,7 @@ $r->addRoute("detalle/:ID", "GET", "ControllerPeliculas", "showDetail");
 $r->addRoute("numero", "GET", "ControllerPeliculas", "shownum");
 $r->addRoute("elegirCalif/:ID", "POST", "ControllerPeliculas", "NewScore");
 $r->addRoute("buscarAvanzado", "POST", "ControllerPeliculas", "advancedSearch");
+$r->addRoute("deleteImage/:ID", "GET", "ControllerPeliculas", "showForm");
 
 
 //GENERO

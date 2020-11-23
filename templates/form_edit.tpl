@@ -19,6 +19,7 @@
             <option value="Japon">Japon</option>
             <option value="Canada">Canada</option>
             <option value="España">España</option>
+            <option value="España">Corea del Sur</option>
         </select>
         {foreach $peliculas as $pelicula} 
             <input type="text" name="director_a" placeholder="inserte director/a" value="{$pelicula->director_a}">

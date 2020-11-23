@@ -106,8 +106,12 @@ class ControllerPeliculas{
     function searchBy(){
         $search= $_POST['valor'];
         $parametro= $_POST['parametro'];
-        $peliculas=$this->model->search($parametro, $search);
-        $this->view->renderResults($peliculas);
+
+        if(isset($search) && isset($parametro) && $search != "" && $parametro != ""){
+            $peliculas=$this->model->search($parametro, $search);
+            $this->view->renderResults($peliculas);
+        }else $this->view->showError("Complete los campos para continuar");
+        
     }
 
     function addGenre(){

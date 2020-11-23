@@ -45,6 +45,7 @@ class CommentsControllerApi extends ApiController {
             $this->view->response("se borro", 200); 
         }else {
             $this->view->response("No tiene permisos de administrador, no puede borrar un comentario", 404);
+        }
     }
 
     function insertComment($params=null){
@@ -63,17 +64,13 @@ class CommentsControllerApi extends ApiController {
                 }
             }else{
                 $this->view->response("Escriba un comentario", 501);
-            }
+             }
 
         }else {
             $this->view->response("No está loggeado, ingrese para postear un comentario", 404);
-        }
-        
-    }
-
+         }
     
-
-
+    }
 
 }
 

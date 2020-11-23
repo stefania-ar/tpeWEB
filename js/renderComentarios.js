@@ -9,28 +9,7 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     getComentarios();
-  //deleteComentario();
-
-    
-    let variable= document.getElementsByName("boton_borrar");
-        console.log(variable);
-
-        const URL="api/comentarios/";
-
-        for (let i = 0; i < variable.length; i++) {
-            console.log(variable);
-            const element = variable[i].addEventListener('click',consola());
-            
-            
-        }
-        if(variable.click){
-            consola();
-        }
-
-
-});
-
-    
+});    
 
 function getComentarios(){
     let ID= document.getElementById("id_peli").value;
@@ -74,31 +53,31 @@ function insertComentario(){
     getComentarios();
 }
 
-function deleteComentario(){
+function deleteComentario(id){
     let variable= document.getElementsByName("boton_borrar");
     console.log(variable);
-
+    let parte= id;
     const URL="api/comentarios/";
-    if(variable.onClick){
-        consola();
-    }
+    
+    fetch(URL+parte, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    })
+    .catch(error =>console.log(error));
 
+    getComentarios();
+    getComentarios();
 }
 
-function consola(){
-    alert("hola");
-    console.log("delete");
-}
 
 function renderComentarios(comen) {
     //console.log(comen);
     let lista= document.getElementById("list_comentarios");
     lista.innerHTML ="";
     
-     
     comen.forEach(com => {
         let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
-        let button= `<button name="boton_borrar" id="id_boton${com.id}">borrar</button>`;
+        let button= `<button name="boton_borrar" onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar</button>`;
         let puntuacion= `${com.puntuacion}`;
         lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion + button +`</div>`;
         document.getElementById("id_span").innerHTML = puntuacion;
@@ -106,14 +85,5 @@ function renderComentarios(comen) {
 
 }
 
-    
-function hola(){
-    fetch(URL+parte, {
-    method: 'DELETE',
-    headers: {'Content-Type': 'application/json'}
-})
-.catch(error =>console.log(error));
-}
 
-console.log("final");
 

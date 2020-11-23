@@ -15,11 +15,11 @@ $r= new Router();
 $r->addRoute("home", "GET", "ControllerPeliculas", "home");
 $r->addRoute("insert", "POST", "ControllerPeliculas", "insert");
 $r->addRoute("showAll", "GET", "ControllerPeliculas", "viewAllMovies");
-$r->addRoute("buscarPorNombre", "POST", "ControllerPeliculas", "searchByName");
-$r->addRoute("buscarPorAnio", "POST", "ControllerPeliculas", "searchByYear");
-$r->addRoute("buscarPorPais", "POST", "ControllerPeliculas", "searchByCountry");
-$r->addRoute("buscarPorDireccion", "POST", "ControllerPeliculas", "searchByDirection");
-$r->addRoute("buscarPorCalificacion", "POST", "ControllerPeliculas", "searchByCalification");
+$r->addRoute("buscarPorNombre", "POST", "ControllerPeliculas", "searchBy");
+$r->addRoute("buscarPorAnio", "POST", "ControllerPeliculas", "searchBy");
+$r->addRoute("buscarPorPais", "POST", "ControllerPeliculas", "searchBy");
+$r->addRoute("buscarPorDireccion", "POST", "ControllerPeliculas", "searchBy");
+$r->addRoute("buscarPorCalificacion", "POST", "ControllerPeliculas", "searchBy");
 $r->addRoute("borrar/:ID", "GET", "ControllerPeliculas", "deleteMovie");
 $r->addRoute("editar/:ID", "GET", "ControllerPeliculas", "showForm");
 $r->addRoute("editarDesdeForm/:ID", "POST", "ControllerPeliculas", "editMovie");
@@ -35,7 +35,7 @@ $r->addRoute("borrar_genero/:ID", "GET", "ControllerPeliculas", "deleteGenre");
 $r->addRoute("editar_genero/:ID", "GET", "ControllerPeliculas", "showFormGenres");
 $r->addRoute("editarGeneroDesdeForm/:ID", "POST", "ControllerPeliculas", "editGenre");
 $r->addRoute("crearGenero", "POST", "ControllerPeliculas", "addGenre");
-$r->addRoute("selectByGenre", "POST", "ControllerPeliculas", "viewByGenre");
+$r->addRoute("selectByGenre", "POST", "ControllerPeliculas", "searchBy");
 $r->addRoute("showAllGenres", "GET", "ControllerPeliculas", "viewAllGenres");
 
 //USUARIOS

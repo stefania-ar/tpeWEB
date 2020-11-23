@@ -42,6 +42,17 @@ function getComentarios(){
     .catch(error =>console.log(error));
 }
 
+function getComentario(){
+    let ID= document.getElementById("id_peli").value;
+    
+    const URL= "api/comentario/";
+
+    fetch(URL+ID)
+    .then(response => response.json())
+    .then(comentarios=> renderComentarios(comentarios))
+    .catch(error =>console.log(error));
+}
+
 function insertComentario(){
     console.log("hizo el comen")
     let comentario={
@@ -83,13 +94,14 @@ function renderComentarios(comen) {
     //console.log(comen);
     let lista= document.getElementById("list_comentarios");
     lista.innerHTML ="";
+    
      
     comen.forEach(com => {
-        let comentario=`<div class="small_row"><li>${com.comentario}</li>`;
+        let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
         let button= `<button name="boton_borrar" id="id_boton${com.id}">borrar</button>`;
         let puntuacion= `${com.puntuacion}`;
-        lista.innerHTML+= comentario +"- Puntuacion: "+ puntuacion + button +`</div>`;
-
+        lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion + button +`</div>`;
+        document.getElementById("id_span").innerHTML = puntuacion;
     });
 
 }

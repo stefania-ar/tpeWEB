@@ -76,7 +76,7 @@
         </select>
         {if $pelicula->imagen != null}
             <input class="cssGeneral" type="file" hidden name="input_img" id="imageToUpload" value="null">
-            <img src="{$pelicula->imagen}" alt="pelicula" srcset="">
+            <img src="{$pelicula->imagen}" alt="pelicula" class="imagenes">
             <button type="submit">ELIMINAR</button>
         {/if}
         

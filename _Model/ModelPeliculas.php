@@ -43,35 +43,6 @@ class ModelPeliculas{
         $sentencia-> execute(array($valor));
         return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
     }
-    function returnName($nombre){
-        $sentencia=$this->db->prepare(" SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE `titulo`=?");
-        $sentencia-> execute(array($nombre));
-        return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
-    }
-
-    function returnYear($anio){ //puede ser año <otro año
-        $sentencia=$this->db->prepare(" SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE `anio`=?");
-        $sentencia-> execute(array($anio));
-        return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
-    }
-
-    function returnCountry($country){
-        $sentencia=$this->db->prepare(" SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE `pais`=?");
-        $sentencia-> execute(array($country));
-        return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
-    }
-
-    function returnDirection($country){
-        $sentencia=$this->db->prepare(" SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE `director_a`=?");
-        $sentencia-> execute(array($country));
-        return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
-    }
-
-    function returnCalif($calif){
-        $sentencia=$this->db->prepare(" SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE `calificacion`=?");
-        $sentencia-> execute(array($calif));
-        return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
-    }
 
     function delete($id){
         $sentencia=$this->db->prepare("DELETE FROM peliculas WHERE id=?");
@@ -103,8 +74,6 @@ class ModelPeliculas{
 
     function advancedSearch($title, $anio){
         $UserSearch = "SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero ";
-
-        
         $array = array();
 
         if (!empty($title))  {
@@ -113,7 +82,6 @@ class ModelPeliculas{
         if (!empty($anio)){
             $array['anio']=$anio;
         }
-        
 
         $longitud= count($array);
         $ref=array_keys($array);
@@ -135,15 +103,11 @@ class ModelPeliculas{
            $stmt->bindValue($key, $value);
             
         }
-                
-        
         var_dump($UserSearch);
-        
-        $stmt->execute(array($title));
+        $stmt->execute();
         var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
         die();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
-        
     }
 }
 

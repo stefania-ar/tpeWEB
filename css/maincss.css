@@ -24,6 +24,11 @@
   margin-bottom: 2vh;
 }
 
+.imagenes{
+  height: 450 px;
+  width: 300px;
+}
+
 .apartado{
   margin: 0vh 3vh 0vh 23vh;
   border-color: #111;

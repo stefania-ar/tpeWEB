@@ -1,0 +1,74 @@
+$UserSearch = "SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero ";
+
+        
+        
+        $array = array();
+
+        $array['0']= $title;
+        $array['1']=$anio;
+        
+
+        $longitud= count($array);
+
+        var_dump($longitud);
+
+        for ($i=0; $i < $longitud; $i++) { 
+            var_dump($array[$i]);
+            if (!empty($array[$i])) {
+                if(i==0){
+                    $UserSearch.= "WHERE" . $array[i] . ' LIKE %"' . $value . '"%';
+                    var_dump($array[$i]);
+                }
+                if(i>0){
+                    $UserSearch.= "AND".$array[i] . ' LIKE %"' . $value . '"%';
+                }
+                
+                    
+            }
+            
+        }
+        $sentencia=$this->db->prepare($UserSearch);
+        var_dump($sentencia);
+        $sentencia->execute(array());
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
+
+
+
+
+function search($parametro, $valor) {
+
+        $sentencia=$this->db->prepare(" SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE `$parametro`=?");
+        $sentencia-> execute(array($valor));
+        return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
+    }
+
+Buenas! Estoy haciendo lo del filtro avanzado, y me puse a buscar como hacer dinamico que me buscara solo los campos 
+que haya completado en el formulario (habiendo otros campos vacios).
+Por ejemplo que me busque todas las peliculas de Argentina en el año 2018:
+
+**imagen filtro.png**
+
+Esta es la funcion del modelo hasta ahora:
+
+**imagen: funcion filtro MODELO**
+
+Y la funcion de mi controller (hasta ahora paso esos 2 parametros):
+
+**imagen: funcion filtro CONTROLLER**
+
+La sentencia creo que se envia bien porque cuando la imprimo la sentencia $UserSearch va a la base de datos.
+
+**imagen vardump**
+
+Creo que es en el execute que tengo problemas, no sé bien que debería pasarle ahí para que me traiga los datos correctos,
+porque solo me trae un array vacio.
+
+
+
+de donde saque info
+https://stackoverflow.com/questions/40633149/sql-advanced-search-ignore-empty-queries
+https://stackoverflow.com/questions/4636166/only-variables-should-be-passed-by-reference
+https://stackoverflow.com/questions/23274510/pdo-making-an-execute-statement-dynamic-but-not-working

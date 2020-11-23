@@ -43,7 +43,8 @@
         <h1>{$titulo}</h1>
         <form action="selectByGenre" method="post">
             <label for="genero">{$genero}</label>
-            <select class="cssGeneral" name="genero2" >
+            <input type="text" hidden name="parametro" value="nombre">
+            <select class="cssGeneral" name="valor" >
             {foreach from =$generos item=genero} 
                 $pelicula->nombre;
                 <option value={$genero->nombre}>{$genero->nombre}</option>
@@ -54,20 +55,22 @@
 
         <form action="buscarPorNombre" method="post">
             <label for="nombre">Nombre</label>
-            <input class="cssGeneral" type="text" name="nombrePelicula">
-            <input type="text" hidden name="parametro_nombre" value="titulo">
+            <input class="cssGeneral" type="text" name="valor">
+            <input type="text" hidden name="parametro" value="titulo">
             <button type="submit">{$Enviar}</button>
         </form>
 
         <form action="buscarPorAnio" method="post">
             <label for="año">{$anio}</label>
-            <input class="cssGeneral" type="number" name="anio">
+            <input class="cssGeneral" type="number" name="valor">
+            <input type="text" hidden name="parametro" value="anio">
             <button type="submit">{$Enviar}</button>
         </form>
 
         <form action="buscarPorPais" method="post">
             <label for="Pais">{$pais}</label>
-            <select class="cssGeneral" name="pais2" >
+            <input type="text" hidden name="parametro" value="pais">
+            <select class="cssGeneral" name="valor" >
                 <option value="Argentina">Argentina</option>
                 <option value="Estados Unidos">Estados Unidos</option>
                 <option value="Chile">Chile</option>
@@ -80,13 +83,15 @@
 
         <form action="buscarPorDireccion" method="post">
             <label for="Direccion">{$direccion}</label>
-            <input class="cssGeneral" type="text" name="direccion">
+            <input class="cssGeneral" type="text" name="valor">
+            <input type="text" hidden name="parametro" value="director_a">
             <button type="submit">{$Enviar}</button>
         </form>
 
         <form action="buscarPorCalificacion" method="post">
             <label for="Calificacion">{$calif}</label>
-            <input class="cssGeneral" type="number" name="calificacion">
+            <input class="cssGeneral" type="number" name="valor">
+            <input type="text" hidden name="parametro" value="calificacion">
             <button type="submit">{$Enviar}</button>
         </form>
     </div>

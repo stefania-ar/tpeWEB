@@ -29,7 +29,7 @@ class ControllerPeliculas{
         $generos=$this->modelGeneros->selectAllGenres();
         
         $user=$this->checkUser();
-        $type=$this->checkType();
+        $type=$this->helper->checkType();
         
         $this->view->showHome($generos, $user, $type);
     }
@@ -37,15 +37,6 @@ class ControllerPeliculas{
     private function checkUser(){
         session_start();
         if(isset($_SESSION['USER'])){
-            return true;
-        }else return false;
-    }
-
-    private function checkType(){
-        if(session_status()== PHP_SESSION_NONE){
-            session_start();
-        }
-        if(isset($_SESSION['TYPE']) && ($_SESSION['TYPE'] == 1)){
             return true;
         }else return false;
     }
@@ -89,7 +80,7 @@ class ControllerPeliculas{
      
     function viewAllMovies(){
         $peliculas=$this->model->selectAllTable();
-        $type=$this->checkType();
+        $type=$this->helper->checkType();
 
         if(isset($_SESSION['USER'])){
             $user=$_SESSION['USER'];
@@ -104,66 +95,19 @@ class ControllerPeliculas{
             $scores=null;
             $this->view->onlyMovies($peliculas, $type, $user);
         }
-        
     }
     
     function viewAllGenres(){
-        $type=$this->checkType();
+        $type=$this->helper->checkType();
         $generos=$this->modelGeneros->selectAllGenres();
         $this->view->viewAllGenres($generos, $type);
     }
 
-    function viewByGenre(){
-        $genre= $_POST['genero2'];
-
-        if(isset($genre)){
-            $peliculas=$this->model->selectByGenre($genre);
-            $this->view->viewAllMovies($peliculas);
-        }
-        
-    }
-
-    function searchByName(){
-        $titulo= $_POST['nombrePelicula'];
-        $parametro= $_POST['parametro_nombre'];
-        $peliculas=$this->model->search($parametro, $titulo);
+    function searchBy(){
+        $search= $_POST['valor'];
+        $parametro= $_POST['parametro'];
+        $peliculas=$this->model->search($parametro, $search);
         $this->view->renderResults($peliculas);
-    }
-
-    function searchByYear(){
-        $anio= $_POST['anio'];
-
-        if(isset($anio)){
-            $peliculas=$this->model->returnYear($anio);
-            $this->view->renderResults($peliculas);
-        }
-    }
-
-    function searchByCountry(){
-        $pais= $_POST['pais2'];
-
-        if(isset($pais)){
-            $peliculas=$this->model->returnCountry($pais);
-            $this->view->renderResults($peliculas);
-        }
-    }
-
-    function searchByDirection(){
-        $direccion = $_POST['direccion'];
-
-        if(isset($direccion)){
-            $peliculas=$this->model->returnDirection($direccion);
-            $this->view->renderResults($peliculas);
-        }
-    }
-
-    function searchByCalification(){
-        $calif = $_POST['calificacion'];
-
-        if(isset($calif)){
-            $peliculas=$this->model->returnCalif($calif);
-            $this->view->renderResults($peliculas);
-        }
     }
 
     function addGenre(){

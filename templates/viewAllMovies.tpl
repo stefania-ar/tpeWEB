@@ -24,7 +24,7 @@
                     <td>{$pelicula->calificacion}</td>
                     <td>{$pelicula->nombre}</td>
                     {if $pelicula->imagen != null}
-                        <td><img src="{$pelicula->imagen}" alt="pelicula" srcset=""><button><a href="deleteImage/{$pelicula->id}">eliminar</a></button></td>
+                        <td><img src="{$pelicula->imagen}" alt="pelicula" class="imagenes"><button><a href="deleteImage/{$pelicula->id}">eliminar</a></button></td>
                     {else}
                         <td></td>
                     {/if}
@@ -47,6 +47,7 @@
     <form action="" method="post" class="column" id="formulario_coment">
         <label for="">Ingrese un comentario</label>
         <input type="text" placeholder="escriba su comentario" id="input_comentario" class="expand">
+        <label for="">Su valoracion de este item es: <span id="id_span"> </span></label>
         <label for="">Ingrese su valoracion</label>
         <select name="input_puntuacion" id="input_puntuacion" class="select">
             <option value="1">UNO</option>

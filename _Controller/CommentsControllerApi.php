@@ -2,14 +2,18 @@
 
 require_once '_Model/ModelComentarios.php';
 require_once 'APIController.php';
+require_once './helpers/auth.php';
 
 
 class CommentsControllerApi extends ApiController {
+
+    private $helper;
 
     function __construct(){
         #$this->modelPeliculas= new ModelPeliculas();
         parent::__construct();
         $this->modelComentarios= new ModelComentarios();
+        $this->helper= new helper();
     }
 
     function getComments($params=null){
@@ -33,14 +37,18 @@ class CommentsControllerApi extends ApiController {
     }
 
     function deleteComment($params=null){
-        $id= $params [':ID'];
-        $this->modelComentarios->eliminarComent($id);
-        $this->view->response("se borro", 200); 
-         
+        $admin=$this->helper->checktype();
+
+        if($admin=true){
+            $id= $params [':ID'];
+            $this->modelComentarios->eliminarComent($id);
+            $this->view->response("se borro", 200); 
+        }else {
+            $this->view->response("No tiene permisos de administrador, no puede borrar un comentario", 404);
     }
 
     function insertComment($params=null){
-        $status=$this->auth();
+        $status=$this->helper->auth();
 
         if($status== true){
             $body=$this->getData();
@@ -63,15 +71,7 @@ class CommentsControllerApi extends ApiController {
         
     }
 
-    function auth($params=null){
-        if(session_status()== PHP_SESSION_NONE){
-            session_start();
-        }
-        if(isset($_SESSION['USER'])){
-            return true;
-        }
-        return false;
-    }
+    
 
 
 

@@ -30,4 +30,19 @@ class helper{
              return $user;
         }
     }
+
+    function auth($params=null){
+        $this->start_session();
+        if(isset($_SESSION['USER'])){
+            return true;
+        }
+        return false;
+    }
+
+    function checkType(){
+        $this->start_session();
+        if(isset($_SESSION['TYPE']) && ($_SESSION['TYPE'] == 1)){
+            return true;
+        }else return false;
+    }
 }

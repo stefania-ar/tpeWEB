@@ -1,14 +1,18 @@
-
 document.addEventListener("DOMContentLoaded", function(){
     
-    document.getElementById("formulario_coment").addEventListener("submit", function(e){
-        e.preventDefault();
-        insertComentario();
-        getComentarios();
-        console.log("hice el get");
-    });
-
     getComentarios();
+
+    let usuario= document.getElementById("usuario").value;
+    
+    if(usuario != "null"){
+        document.getElementById("formulario_coment").addEventListener("submit", function(e){
+            e.preventDefault();
+            insertComentario();
+            getComentarios();
+        });
+            
+    }
+    
 });    
 
 function getComentarios(){
@@ -46,16 +50,15 @@ function insertComentario(){
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(comentario)
-    })
+    }).then(response => response.json())
     .catch(error =>console.log(error));
 
     
-    getComentarios();
+    //getComentarios();
 }
 
 function deleteComentario(id){
     let variable= document.getElementsByName("boton_borrar");
-    console.log(variable);
     let parte= id;
     const URL="api/comentarios/";
     
@@ -63,6 +66,7 @@ function deleteComentario(id){
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
     })
+    .then(response => response.json())
     .catch(error =>console.log(error));
 
     getComentarios();
@@ -71,17 +75,31 @@ function deleteComentario(id){
 
 
 function renderComentarios(comen) {
-    //console.log(comen);
     let lista= document.getElementById("list_comentarios");
     lista.innerHTML ="";
     
-    comen.forEach(com => {
-        let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
-        let button= `<button name="boton_borrar" onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar</button>`;
-        let puntuacion= `${com.puntuacion}`;
-        lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion + button +`</div>`;
-        document.getElementById("id_span").innerHTML = puntuacion;
-    });
+    let usuario= document.getElementById("usuario").value;
+
+    if(usuario != "null"){
+        tipo_usuario= document.getElementById("input_tipo").value;
+        comen.forEach(com => {
+            let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
+            let button= `<button name="boton_borrar" onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar</button>`;
+            let puntuacion= `${com.puntuacion}`;
+            if ( tipo_usuario==1) {
+                lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion + button +`</div>`;
+            }if (tipo_usuario==0) {
+                lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
+            }
+         
+        });
+    }else{
+        comen.forEach(com => {
+            let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
+            let puntuacion= `${com.puntuacion}`;
+            lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
+        });
+    }    
 
 }
 

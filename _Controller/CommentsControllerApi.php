@@ -39,7 +39,7 @@ class CommentsControllerApi extends ApiController {
     function deleteComment($params=null){
         $admin=$this->helper->checktype();
 
-        if($admin=true){
+        if($admin==true){
             $id= $params [':ID'];
             $this->modelComentarios->eliminarComent($id);
             $this->view->response("se borro", 200); 

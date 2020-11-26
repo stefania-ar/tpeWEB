@@ -72,12 +72,12 @@ class ModelPeliculas{
     }
     
 
-    function advancedSearch($title, $anio){
+    function advancedSearch($titulo, $anio){
         $UserSearch = "SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero ";
         $array = array();
 
-        if (!empty($title))  {
-            $array['title']= $title;
+        if (!empty($titulo))  {
+            $array['titulo']= $titulo;
         }
         if (!empty($anio)){
             $array['anio']=$anio;
@@ -87,12 +87,12 @@ class ModelPeliculas{
         $ref=array_keys($array);
         $last_key = end($ref);
 
-        $UserSearch = "SELECT * peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE ";
+        $UserSearch = "SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE ";
         
 
                 foreach ($array as $key => $value)
                 {
-                    $UserSearch .= $key . ' LIKE %"' . $value . '"%';
+                    $UserSearch .= $key . " LIKE '%" . $value . "%'";
                     if ($last_key != $key) $UserSearch .= ' AND ';
                     
                 }
@@ -103,11 +103,8 @@ class ModelPeliculas{
            $stmt->bindValue($key, $value);
             
         }
-        var_dump($UserSearch);
         $stmt->execute();
-        var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
-        die();
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 }
 

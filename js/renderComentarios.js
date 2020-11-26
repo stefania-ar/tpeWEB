@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function(){
         document.getElementById("formulario_coment").addEventListener("submit", function(e){
             e.preventDefault();
             insertComentario();
-            getComentarios();
         });
             
     }
@@ -46,15 +45,17 @@ function insertComentario(){
 
     }
 
+    console.log("aca empieza el fetch");
     fetch('api/comentarios', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(comentario)
-    }).then(response => response.json())
+    }).then(response => {
+        response.json()
+        getComentarios();
+    })
     .catch(error =>console.log(error));
 
-    
-    //getComentarios();
 }
 
 function deleteComentario(id){
@@ -66,11 +67,12 @@ function deleteComentario(id){
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
     })
-    .then(response => response.json())
+    .then(response => {
+        response.json()
+        getComentarios();
+    })
     .catch(error =>console.log(error));
-
-    getComentarios();
-    getComentarios();
+    
 }
 
 

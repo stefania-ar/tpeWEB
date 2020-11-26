@@ -124,14 +124,6 @@ class ViewPeliculas{
         $this->smarty->display('templates/form_edit_genre.tpl');
     }
 
-    function showcap($c){
-        $this->smarty->assign('c', $c);
-        $this->smarty->assign('Enviar', "Enviar");
-        $this->smarty->assign('title_header', $this->title);
-
-        $this->smarty->display('templates/num.tpl');
-    }
-
     function showError($msj){
         $this->smarty->assign('title_header', "No se puede continuar");
         $this->smarty->assign('msj', $msj);

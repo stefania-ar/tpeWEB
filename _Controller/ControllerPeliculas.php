@@ -28,35 +28,14 @@ class ControllerPeliculas{
     function home (){
         $generos=$this->modelGeneros->selectAllGenres();
         
-        $user=$this->checkUser();
+        $user=$this->helper->checkUser();
         $type=$this->helper->checkType();
         
         $this->view->showHome($generos, $user, $type);
     }
 
-    private function checkUser(){
-        session_start();
-        if(isset($_SESSION['USER'])){
-            return true;
-        }else return false;
-    }
-
-    private function checkLogin(){
-        session_start();
-
-        if(!isset($_SESSION['TYPE'])){
-            $this->viewUser->render_login();
-                die();
-        }else if ( (isset($_SESSION['TYPE'])) && ($_SESSION['TYPE']!=1) ) {#es distinto de 1 porque si lo pongo igual no sé a donde llevarlo
-                $this->viewUser->render_login();                            #porque viene de muchos lugares
-                die();
-            
-        }
-        
-    }
-
     function insert(){
-        $this->checkLogin();
+        $this->helper->checkLogin();
 
         $genre=$_POST['genero'];
         if(isset($_POST['title']) && ($_POST['title'] !=null)&&
@@ -115,7 +94,7 @@ class ControllerPeliculas{
     }
 
     function addGenre(){
-        $this->checkLogin();
+        $this->helper->checkLogin();
 
         $genre= $_POST['generoCrear'];
         if(isset($genre)){
@@ -125,7 +104,7 @@ class ControllerPeliculas{
     }
 
     function deleteMovie($params=null){
-        $this->checkLogin();
+        $this->helper->checkLogin();
 
         $id= $params [':ID'];
         $this->model->delete($id);
@@ -133,6 +112,7 @@ class ControllerPeliculas{
     }
 
     function showForm($params=null){
+        $this->helper->checkLogin();
         $id= $params [':ID'];
         $generos=$this->modelGeneros->selectAllGenres();
         $peliculas=$this->model->returnMovieByID($id);
@@ -141,7 +121,7 @@ class ControllerPeliculas{
     }
 
     function editMovie($params=null){
-        $this->checkLogin();
+        $this->helper->checkLogin();
         $id= $params [':ID'];
 
         if(isset($_POST['title']) && ($_POST['title'] !=null) && ($_POST['anio']) && ($_POST['pais']) && 
@@ -162,7 +142,7 @@ class ControllerPeliculas{
     }
 
     function deleteGenre($params=null){
-        $this->checkLogin();
+        $this->helper->checkLogin();
 
         $id= $params [':ID'];
         $this->modelGeneros->deleteGenre($id);
@@ -170,7 +150,7 @@ class ControllerPeliculas{
     }
 
     function showFormGenres($params=null){
-        $this->checkLogin();
+        $this->helper->checkLogin();
         $id_genero= $params [':ID'];
 
         $genero=$this->modelGeneros->returnGenreByID($id_genero);
@@ -178,7 +158,7 @@ class ControllerPeliculas{
     }
 
     function editGenre($params=null){
-        $this->checkLogin();
+        $this->helper->checkLogin();
         
         $id_genero= $params [':ID'];
         $nombre=$_POST['genreName'];
@@ -200,7 +180,12 @@ class ControllerPeliculas{
     function advancedSearch(){
         $title = $_POST['nombrePelicula2'];
         $anio=$_POST['anio2'];
-        $peliculas=$this->model->advancedSearch($title, $anio);
+        $pais= $_POST['pais2'];
+        $direccion=$_POST['direccion2'];
+        $calif=$_POST['calificacion2'];
+        $genero=$_POST['genero2'];
+
+        $peliculas=$this->model->advancedSearch($title, $anio, $pais, $direccion, $calif, $genero);
 
         $this->view->renderResults($peliculas);
     }

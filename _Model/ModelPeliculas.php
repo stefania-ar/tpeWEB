@@ -72,7 +72,7 @@ class ModelPeliculas{
     }
     
 
-    function advancedSearch($titulo, $anio){
+    function advancedSearch($titulo, $anio, $pais, $direccion, $calif, $genero){
         $UserSearch = "SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero ";
         $array = array();
 
@@ -82,8 +82,19 @@ class ModelPeliculas{
         if (!empty($anio)){
             $array['anio']=$anio;
         }
+        if($pais != "Select"){
+            $array['pais']= $pais;
+        }
+        if (!empty($direccion)){
+            $array['director_a']=$direccion;
+        }
+        if(!empty($calif)){
+            $array['calificacion']=$calif;
+        }
+        if($genero != "Select"){
+            $array['nombre']= $genero;
+        }
 
-        $longitud= count($array);
         $ref=array_keys($array);
         $last_key = end($ref);
 

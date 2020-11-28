@@ -45,4 +45,25 @@ class helper{
             return true;
         }else return false;
     }
+
+    function checkUser(){
+        $this->start_session();
+        if(isset($_SESSION['USER'])){
+            return true;
+        }else return false;
+    }
+
+    function checkLogin(){
+        session_start();
+
+        if(!isset($_SESSION['TYPE'])){
+            $this->viewUser->render_login();
+                die();
+        }else if ( (isset($_SESSION['TYPE'])) && ($_SESSION['TYPE']!=1) ) {#es distinto de 1 porque si lo pongo igual no sé a donde llevarlo
+                $this->viewUser->render_login();                            #porque viene de muchos lugares
+                die();
+            
+        }
+        
+    }
 }

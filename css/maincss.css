@@ -163,3 +163,17 @@ td{
 table{
   margin-bottom: 1vh;
 }
+
+.formulario{
+  display: grid;
+  grid-template-columns: 150%;
+  row-gap: 0;
+  align-items: center;
+}
+
+.centrado{
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr;
+  
+}

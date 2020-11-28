@@ -41,37 +41,73 @@
             <button type="submit">{$Enviar}</button>
         </form>
         
+        
         <h1>{$titulo}</h1>
-        <form action="selectByGenre" method="post">
-            <label for="genero">{$genero}</label>
-            <input type="text" hidden name="parametro" value="nombre">
-            <select class="cssGeneral" name="valor" >
-            {foreach from =$generos item=genero} 
-                $pelicula->nombre;
-                <option value={$genero->nombre}>{$genero->nombre}</option>
-            {/foreach}    
-            </select>
-        <button type="submit">{$Enviar}</button>
-        </form>
-
-        <form action="buscarPorNombre" method="post">
+            <section class="">
+            <form action="selectByGenre" method="post" class="centrado">
+                <label for="genero">{$genero}</label>
+                <input type="text" hidden name="parametro" value="nombre">
+                <select class="cssGeneral" name="valor" >
+                    {foreach from =$generos item=genero} 
+                    <option value={$genero->nombre}>{$genero->nombre}</option>
+                    {/foreach}    
+                </select>
+                <button type="submit">{$Enviar}</button>
+            </form>
+            
+            <form action="buscarPorNombre" method="post" class="centrado">
+                <label for="nombre">Nombre</label>
+                <input class="cssGeneral" type="text" name="valor">
+                <input type="text" hidden name="parametro" value="titulo">
+                <button type="submit">{$Enviar}</button>
+            </form>
+            
+            <form action="buscarPorAnio" method="post" class="centrado">
+                <label for="año">{$anio}</label>
+                <input class="cssGeneral" type="number" name="valor">
+                <input type="text" hidden name="parametro" value="anio">
+                <button type="submit">{$Enviar}</button>
+            </form>
+            
+            <form action="buscarPorPais" method="post" class="centrado">
+                <label for="Pais">{$pais}</label>
+                <input type="text" hidden name="parametro" value="pais">
+                <select class="cssGeneral" name="valor" >
+                    <option value="Argentina">Argentina</option>
+                    <option value="Estados Unidos">Estados Unidos</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Japon">Japon</option>
+                    <option value="Canada">Canada</option>
+                    <option value="España">España</option>
+                </select>
+                <button type="submit">{$Enviar}</button>
+            </form>
+            
+            <form action="buscarPorDireccion" method="post" class="centrado">
+                <label for="Direccion">{$direccion}</label>
+                <input class="cssGeneral" type="text" name="valor">
+                <input type="text" hidden name="parametro" value="director_a">
+                <button type="submit">{$Enviar}</button>
+            </form>
+            
+            <form action="buscarPorCalificacion" method="post" class="centrado">
+                <label for="Calificacion">{$calif}</label>
+                <input class="cssGeneral" type="number" name="valor">
+                <input type="text" hidden name="parametro" value="calificacion">
+                <button type="submit">{$Enviar}</button>
+            </form>
+        </section>
+            
+            
+    <h1>Búsqueda avanzada</h1>
+    <form action="buscarAvanzado" method="post" class="formulario">
             <label for="nombre">Nombre</label>
-            <input class="cssGeneral" type="text" name="valor">
-            <input type="text" hidden name="parametro" value="titulo">
-            <button type="submit">{$Enviar}</button>
-        </form>
-
-        <form action="buscarPorAnio" method="post">
+            <input class="cssGeneral" type="text" name="nombrePelicula2">
             <label for="año">{$anio}</label>
-            <input class="cssGeneral" type="number" name="valor">
-            <input type="text" hidden name="parametro" value="anio">
-            <button type="submit">{$Enviar}</button>
-        </form>
-
-        <form action="buscarPorPais" method="post">
-            <label for="Pais">{$pais}</label>
-            <input type="text" hidden name="parametro" value="pais">
-            <select class="cssGeneral" name="valor" >
+            <input class="cssGeneral" type="number" name="anio2">
+            <label for="año">{$pais}</label>
+            <select class="cssGeneral" name="pais2" >
+                <option selected value="Select">SELECT</option>
                 <option value="Argentina">Argentina</option>
                 <option value="Estados Unidos">Estados Unidos</option>
                 <option value="Chile">Chile</option>
@@ -79,31 +115,19 @@
                 <option value="Canada">Canada</option>
                 <option value="España">España</option>
             </select>
-            <button type="submit">{$Enviar}</button>
-        </form>
-
-        <form action="buscarPorDireccion" method="post">
             <label for="Direccion">{$direccion}</label>
-            <input class="cssGeneral" type="text" name="valor">
-            <input type="text" hidden name="parametro" value="director_a">
-            <button type="submit">{$Enviar}</button>
-        </form>
-
-        <form action="buscarPorCalificacion" method="post">
+            <input class="cssGeneral" type="text" name="direccion2">
             <label for="Calificacion">{$calif}</label>
-            <input class="cssGeneral" type="number" name="valor">
-            <input type="text" hidden name="parametro" value="calificacion">
+            <input class="cssGeneral" type="number" name="calificacion2">
+            <label for="genero">{$genero}</label>
+            <select class="cssGeneral" name="genero2" >
+                <option selected value="Select">SELECT</option>
+                {foreach from =$generos item=genero} 
+                    $pelicula->nombre;
+                    <option value={$genero->nombre}>{$genero->nombre}</option>
+                {/foreach}  
+            </select>
             <button type="submit">{$Enviar}</button>
         </form>
-    </div>
-
-    <form action="buscarAvanzado" method="post">
-            <label for="nombre">Nombre</label>
-            <input class="cssGeneral" type="text" name="nombrePelicula2">
-            
-
-            <label for="año">{$anio}</label>
-            <input class="cssGeneral" type="number" name="anio2">
-            <button type="submit">{$Enviar}</button>
-        </form>
+</div>
 {include file="footer.tpl"}        

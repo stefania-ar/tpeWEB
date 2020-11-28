@@ -123,16 +123,17 @@ class ControllerPeliculas{
     function editMovie($params=null){
         $this->helper->checkLogin();
         $id= $params [':ID'];
+        $imagen= $_POST['imagen'];
 
         if(isset($_POST['title']) && ($_POST['title'] !=null) && ($_POST['anio']) && ($_POST['pais']) && 
             ($_POST['director_a']) && ($_POST['calif']) && ($_POST['genero'])){
 
                 if($_FILES['input_img']['type'] == "image/jpg" || $_FILES['input_img']['type'] == "image/jpeg" || 
-                $_FILES['input_img']['type'] == "image/png" ) {
+                $_FILES['input_img']['type'] == "image/png" || isset($imagen) ) {
                     $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],
                     $_POST['genero'],$id,$_FILES['input_img']['tmp_name']);
                 }else {
-                    $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],
+                    $this->model->editNoImage($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],
                     $id);
                 }
                 

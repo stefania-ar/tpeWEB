@@ -70,6 +70,12 @@ class ModelPeliculas{
                          WHERE id=?");
         $sentencia-> execute(array($title, $anio, $pais, $director_a, $calif, $genre,$filepath, $id));
     }
+
+    function editNoImage($title, $anio, $pais, $director_a, $calif, $genre, $id){
+        $sentencia=$this->db->prepare("UPDATE peliculas SET titulo=?, anio=?, pais=?, director_a=?, calificacion=?, id_genero=?
+                         WHERE id=?");
+        $sentencia-> execute(array($title, $anio, $pais, $director_a, $calif, $genre, $id));
+    }
     
 
     function advancedSearch($titulo, $anio, $pais, $direccion, $calif, $genero){
@@ -109,11 +115,6 @@ class ModelPeliculas{
                 }
         $stmt=$this->db->prepare($UserSearch);
 
-        foreach ($array as $key => $value)
-        {
-           $stmt->bindValue($key, $value);
-            
-        }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }

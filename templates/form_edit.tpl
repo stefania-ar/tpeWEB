@@ -76,7 +76,8 @@
             {/foreach}
         </select>
         {if $pelicula->imagen != null}
-            <input class="cssGeneral" type="file" hidden name="input_img" id="imageToUpload" value="null">
+        <input class="cssGeneral" type="file" hidden name="input_img" id="imageToUpload" value="null">
+            <input type="text" name="imagen" value="{$pelicula->imagen}" hidden>
             <img src="{$pelicula->imagen}" alt="pelicula" class="imagenes">
             <button type="submit">ELIMINAR</button>
         {/if}

@@ -16,9 +16,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function getComentarios(){
     let ID= document.getElementById("id_peli").value;
-    const URL= "api/comentarios/";
+    const URL= "api/peliculas/"; 
+    const recurso= "/comentarios";
 
-    fetch(URL+ID)
+    fetch(URL+ID+recurso)
     .then(response => response.json())
     .then(comentarios=> renderComentarios(comentarios))
     .catch(error =>console.log(error));
@@ -98,7 +99,7 @@ function renderComentarios(comen) {
     }else{
         comen.forEach(com => {
             let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
-            let puntuacion= `${com.puntuacion}`;
+            let puntuacion = `${com.puntuacion}`;
             lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
         });
     }    

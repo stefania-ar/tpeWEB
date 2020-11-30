@@ -118,6 +118,12 @@ class ModelPeliculas{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    function getPromedio($id){
+        $sentencia=$this->db->prepare("SELECT AVG(puntuacion) FROM comentarios WHERE id_pelicula=24");
+        $sentencia->execute(array($id));
+        $sentencia->fetch(PDO::FETCH_OBJ);
+    }
 }
 
 

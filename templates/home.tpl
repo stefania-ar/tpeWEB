@@ -14,6 +14,7 @@
                 <option value="Canada">Canada</option>
                 <option value="España">España</option>
                 <option value="España">Corea del Sur</option>
+                <option value="Inglaterra">Inglaterra</option>
             </select>
             <input class="cssGeneral" type="text" name="director_a" placeholder="inserte director/a">
             <input class="cssGeneral" type="number" name="calif" placeholder="inserte calficacion">
@@ -79,6 +80,7 @@
                     <option value="Japon">Japon</option>
                     <option value="Canada">Canada</option>
                     <option value="España">España</option>
+                    <option value="Inglaterra">Inglaterra</option>
                 </select>
                 <button type="submit">{$Enviar}</button>
             </form>
@@ -114,6 +116,7 @@
                 <option value="Japon">Japon</option>
                 <option value="Canada">Canada</option>
                 <option value="España">España</option>
+                <option value="Inglaterra">Inglaterra</option>
             </select>
             <label for="Direccion">{$direccion}</label>
             <input class="cssGeneral" type="text" name="direccion2">

@@ -191,6 +191,14 @@ class ControllerPeliculas{
         $this->view->renderResults($peliculas);
     }
 
+    function getPromedioPuntuacion($params=null){
+        //$id= $params['ID'];
+        $id=24; 
+        $idPeli=$this->model->returnMovieByID($id);
+        //$idPeli->id;
+        $prom=$this->model->getPromedio(24);
+        var_dump($prom);
+    }
 }
 
 

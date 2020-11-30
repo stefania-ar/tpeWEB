@@ -5,7 +5,7 @@ require_once '_Controller/APIController.php';
 
 $r= new Router();
 
-$r->addRoute("comentarios/:ID", "GET", "CommentsControllerApi", "getComments");
+$r->addRoute("peliculas/:ID/comentarios", "GET", "CommentsControllerApi", "getComments");
 $r->addRoute("comentario/:ID", "GET", "CommentsControllerApi", "getComment");
 $r->addRoute("comentarios/:ID", "DELETE", "CommentsControllerApi", "deleteComment");
 $r->addRoute("comentarios", "POST", "CommentsControllerApi", "insertComment");

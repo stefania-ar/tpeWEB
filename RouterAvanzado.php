@@ -28,6 +28,7 @@ $r->addRoute("numero", "GET", "ControllerPeliculas", "shownum");
 $r->addRoute("elegirCalif/:ID", "POST", "ControllerPeliculas", "NewScore");
 $r->addRoute("buscarAvanzado", "POST", "ControllerPeliculas", "advancedSearch");
 $r->addRoute("deleteImage/:ID", "GET", "ControllerPeliculas", "showForm");
+$r->addRoute("promedio/:ID", "GET", "ControllerPeliculas", "getPromedioPuntuacion");
 
 
 //GENERO

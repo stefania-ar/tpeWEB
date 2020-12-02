@@ -101,29 +101,25 @@ class ModelPeliculas{
             $array['nombre']= $genero;
         }
 
-        $ref=array_keys($array);
+        $ref=array_keys($array); //Devuelve todas las claves de un array o un subconjunto de claves de un array
         $last_key = end($ref);
 
         $UserSearch = "SELECT * FROM peliculas p INNER JOIN generos g ON p.id_genero= g.id_genero WHERE ";
         
 
-                foreach ($array as $key => $value)
-                {
-                    $UserSearch .= $key . " LIKE '%" . $value . "%'";
-                    if ($last_key != $key) $UserSearch .= ' AND ';
-                    
-                }
+        foreach ($array as $key => $value)
+        {
+            $UserSearch .=  $key . " LIKE '%" . $value . "%'";
+            if ($last_key != $key) $UserSearch .= ' AND ';
+            
+        }
+        
         $stmt=$this->db->prepare($UserSearch);
 
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function getPromedio($id){
-        $sentencia=$this->db->prepare("SELECT AVG(puntuacion) FROM comentarios WHERE id_pelicula=24");
-        $sentencia->execute(array($id));
-        $sentencia->fetch(PDO::FETCH_OBJ);
-    }
 }
 
 

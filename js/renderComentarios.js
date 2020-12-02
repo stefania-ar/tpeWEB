@@ -83,26 +83,29 @@ function renderComentarios(comen) {
     
     let usuario= document.getElementById("usuario").value;
 
-    if(usuario != "null"){
-        tipo_usuario= document.getElementById("input_tipo").value;
-        comen.forEach(com => {
-            let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
-            let button= `<button name="boton_borrar" onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar</button>`;
-            let puntuacion= `${com.puntuacion}`;
+    comen.forEach(com => {
+        let comentario=`<div class="small_row"><li>${com.comentario}</li>`;
+        let button= `<button name="boton_borrar" onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar</button>`;
+        let puntuacion= `${com.puntuacion}`;
+        
+        if(usuario != "null"){
+            tipo_usuario= document.getElementById("input_tipo").value;
             if ( tipo_usuario==1) {
                 lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion + button +`</div>`;
             }if (tipo_usuario==0) {
                 lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
             }
-         
-        });
-    }else{
-        comen.forEach(com => {
-            let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
-            let puntuacion = `${com.puntuacion}`;
+        }else{
             lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
+        } 
         });
-    }    
+    // }else{
+    //     comen.forEach(com => {
+    //         let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
+    //         let puntuacion = `${com.puntuacion}`;
+    //         lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
+    //     });
+    //}    
 
 }
 

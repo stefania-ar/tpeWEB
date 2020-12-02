@@ -9,6 +9,7 @@ class helper{
 
     function __construct(){
         $this->modelUser= new modelUser();
+        
     }
 
     function start_session(){

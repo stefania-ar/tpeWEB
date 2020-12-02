@@ -111,10 +111,10 @@ class ControllerPeliculas{
         $this->checkLogin();
 
         $genre= $_POST['generoCrear'];
-        if(isset($genre)){
+        if(isset($genre) && $genre != ""){
             $this->modelGeneros->insertGenre($genre);
             $this->view->homeLocation();
-        }
+        }else $this->view->showError("Complete los campos para continuar");
     }
 
     function deleteMovie($params=null){
@@ -177,10 +177,10 @@ class ControllerPeliculas{
         
         $id_genero= $params [':ID'];
         $nombre=$_POST['genreName'];
-        if(isset($nombre)){
+        if(isset($nombre) && $nombre != ""){
             $this->modelGeneros->editGenre($nombre, $id_genero);
             $this->view->genresLocation();
-        }
+        }else $this->view->showError("Complete los campos para continuar");
        
     }
 
@@ -204,14 +204,6 @@ class ControllerPeliculas{
         $this->view->renderResults($peliculas);
     }
 
-    function getPromedioPuntuacion($params=null){
-        //$id= $params['ID'];
-        $id=24; 
-        $idPeli=$this->model->returnMovieByID($id);
-        //$idPeli->id;
-        $prom=$this->model->getPromedio(24);
-        var_dump($prom);
-    }
 }
 
 

@@ -8,10 +8,12 @@ Class ControllerUser{
 
     private $model;
     private $view;
+    private $helper;
 
     function __construct(){
         $this->model= new ModelUser();
         $this->view= new ViewUser();
+        $this->helper= new helper();
     }
 
     function login (){
@@ -75,18 +77,9 @@ Class ControllerUser{
                 $this->view->homeLocation();
         }else $this->view->showFormRegister("Ingrese usuario y/o contraseña");
     }
-
-    private function checkType(){
-        if(session_status()== PHP_SESSION_NONE){
-            session_start();
-        }
-        if(isset($_SESSION['TYPE']) && ($_SESSION['TYPE'] == 1)){
-            return true;
-        }else return false;
-    }
     
     function getAllUsers(){
-        $type=$this->checkType();
+        $type=$this->helper->checkType();
 
         if($type ==true){
             $users=$this->model->getUsers();
@@ -96,7 +89,7 @@ Class ControllerUser{
     }
 
     function cambiarPermisos($params=null){
-        $permiso=$this->checkType();
+        $permiso=$this->helper->checkType();
 
         if ($permiso== true){
             $id= $params [':ID'];
@@ -117,7 +110,7 @@ Class ControllerUser{
     }
 
     function deleteUser($params=null){
-        $permiso=$this->checkType();
+        $permiso=$this->helper->checkType();
         
         if ($permiso== true){
         $id= $params [':ID'];

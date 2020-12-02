@@ -24,7 +24,12 @@
                     <td>{$pelicula->calificacion}</td>
                     <td>{$pelicula->nombre}</td>
                     {if $pelicula->imagen != null}
-                        <td><img src="{$pelicula->imagen}" alt="pelicula" class="imagenes"><button><a href="deleteImage/{$pelicula->id}">eliminar</a></button></td>
+                        <td><img src="{$pelicula->imagen}" alt="pelicula" class="imagenes">
+                        {if $user!=null && $user->tipo_usuario==1}
+                            <button><a href="deleteImage/{$pelicula->id}">eliminar</a></button></td>
+                        {else}
+                            </td>
+                        {/if}
                     {else}
                         <td></td>
                     {/if}

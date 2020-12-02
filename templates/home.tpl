@@ -34,15 +34,28 @@
             <button><a href="showAllUsers" >MOSTRAR LISTA USUARIOS</a></button>
         {/if}
         
+        {if $user != null && $type ==true}
+            <h2>{$titulo2}</h2>
+            <form action="crearGenero" method="post">
+                <label for="Categoria">{$genero}</label>
+                <input class="cssGeneral" type="text" name="generoCrear">
+                <button type="submit">{$Enviar}</button>
+            </form>
+        {/if}
+        
+        {if $user == null}
+            <h1>Encontrá tus peliculas favoritas</h1>
+            <section class="row">
+                <img src="imagenes/chihiro.jpg" class="imagenes" alt="pelicula">
+                <img src="imagenes/howls.jpg" alt="" class="imagenes">
+                <img src="imagenes/viaje_al_centro_de_la_tierra.jpg" alt="" class="imagenes">
+                <img src="imagenes/bolt.jpg" alt="">
+                <img src="imagenes/et.jpg" class="imagenes" alt="">
+            </section>
 
-        <h2>{$titulo2}</h2>
-        <form action="crearGenero" method="post">
-            <label for="Categoria">{$genero}</label>
-            <input class="cssGeneral" type="text" name="generoCrear">
-            <button type="submit">{$Enviar}</button>
-        </form>
-        
-        
+
+        {/if}
+            
         <h1>{$titulo}</h1>
             <section class="">
             <form action="selectByGenre" method="post" class="centrado">
@@ -133,4 +146,5 @@
             <button type="submit">{$Enviar}</button>
         </form>
 </div>
+        
 {include file="footer.tpl"}        

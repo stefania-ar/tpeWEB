@@ -37,7 +37,6 @@ function getComentario(){
 }
 
 function insertComentario(){
-    console.log("hizo el comen")
     let comentario={
         comentario: document.getElementById("input_comentario").value,
         puntuacion: document.getElementById("input_puntuacion").value,
@@ -60,7 +59,6 @@ function insertComentario(){
 }
 
 function deleteComentario(id){
-    let variable= document.getElementsByName("boton_borrar");
     let parte= id;
     const URL="api/comentarios/";
     
@@ -80,7 +78,7 @@ function deleteComentario(id){
 function renderComentarios(comen) {
     let lista= document.getElementById("list_comentarios");
     lista.innerHTML ="";
-    
+
     let usuario= document.getElementById("usuario").value;
 
     comen.forEach(com => {
@@ -98,8 +96,7 @@ function renderComentarios(comen) {
         }else{
             lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
         } 
-        });
-
+    });
 }
 
 

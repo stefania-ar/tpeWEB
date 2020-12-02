@@ -99,13 +99,6 @@ function renderComentarios(comen) {
             lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
         } 
         });
-    // }else{
-    //     comen.forEach(com => {
-    //         let comentario=`<div class="small_row"><li id="${com.id}">${com.comentario}</li>`;
-    //         let puntuacion = `${com.puntuacion}`;
-    //         lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
-    //     });
-    //}    
 
 }
 

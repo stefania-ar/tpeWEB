@@ -56,8 +56,9 @@ class ControllerPeliculas{
 
                 if($_FILES['input_img']['type'] == "image/jpg" || $_FILES['input_img']['type'] == "image/jpeg" || 
                 $_FILES['input_img']['type'] == "image/png" ) {
+                    $fileName=basename($_FILES["input_img"]["name"]);
                     $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],
-                        $_POST['director_a'],$_POST['calif'],$genre,$_FILES['input_img']['tmp_name']);
+                        $_POST['director_a'],$_POST['calif'],$genre,$_FILES['input_img']['tmp_name'], $fileName);
 
                 }else{
                     $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],
@@ -144,8 +145,10 @@ class ControllerPeliculas{
 
                 if($_FILES['input_img']['type'] == "image/jpg" || $_FILES['input_img']['type'] == "image/jpeg" || 
                 $_FILES['input_img']['type'] == "image/png" || isset($imagen) ) {
+
+                    $fileName=basename($_FILES["input_img"]["name"]);
                     $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],
-                    $_POST['genero'],$id,$_FILES['input_img']['tmp_name']);
+                    $_POST['genero'],$id,$_FILES['input_img']['tmp_name'], $fileName);
                 }else {
                     $this->model->editNoImage($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],
                     $id);

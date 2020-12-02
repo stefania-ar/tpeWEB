@@ -8,10 +8,9 @@ class ModelPeliculas{
         $this->db= new PDO('mysql:host=localhost;' .'dbname=basepeliculas;charset=utf8' , 'root', '');
     }
 
-    function insert($title, $anio, $pais, $director_a, $calif, $genre, $fileTemp=null){
+    function insert($title, $anio, $pais, $director_a, $calif, $genre, $fileTemp=null, $fileName=null){
         if(isset($fileTemp)){
-            $fileName=basename($_FILES["input_img"]["name"]);
-            $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_img']['name'], PATHINFO_EXTENSION));
+            $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
         
             move_uploaded_file($fileTemp, $filepath);
             
@@ -55,10 +54,9 @@ class ModelPeliculas{
         return $peliculas=$sentencia-> fetchAll(PDO::FETCH_OBJ);
     }
     
-    function edit($title, $anio, $pais, $director_a, $calif, $genre, $id, $fileTemp=null){
+    function edit($title, $anio, $pais, $director_a, $calif, $genre, $id, $fileTemp=null,$fileName=null){
         if(isset($fileTemp) && $fileTemp != null){
-            $fileName=basename($_FILES["input_img"]["name"]);
-            $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_img']['name'], PATHINFO_EXTENSION));
+            $filepath= "./imagenes/".uniqid("", true) . "." . strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
         
             move_uploaded_file($fileTemp, $filepath);
             

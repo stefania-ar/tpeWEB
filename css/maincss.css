@@ -56,8 +56,6 @@ h1.apartado{
 body {
   align-items: center;
   background-color: #ddddfd;
-  margin-top: 1%;
-  margin-left: 2vh;
 }
 
 html{
@@ -161,7 +159,7 @@ td{
 }
 
 table{
-  margin-bottom: 1vh;
+  margin: 1vh 1vh 1vh 2vh;
 }
 
 .formulario{
@@ -176,4 +174,47 @@ table{
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 1fr;
   
+}
+
+.boton_header{
+  display: flex;
+  flex-grow: initial;
+  margin: 0 1vh 0 1vh;
+  color: white;
+  align-items: center;
+  padding: 0 1vh 0 1vh;
+  text-transform: uppercase;
+  
+}
+
+.botonera{
+  display: flex;
+  background-color: black;
+  margin: 0;
+  height: 100%;
+}
+
+.header{
+  background-color: black;
+  height: 10vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: fantasy;
+  text-transform: uppercase; 
+}
+
+
+html{
+  margin: 0;
+}
+
+header.header li{
+  font-size: 150%;
+  height: 100%;
+  align-self: center;
+}
+
+li:hover{
+  background-color: rgb(46, 45, 45);
 }

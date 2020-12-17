@@ -10,6 +10,11 @@ class ViewUser{
     function __construct(){
         $this->title= "Ingrese para seguir navegando";
         $this->smarty= new Smarty();
+        $this->helper= new helper();
+        $this->smarty->assign('l', "LOGOUT");
+        $this->smarty->assign('li', "LOGIN");
+        $user=$this->helper->checkUser();
+        $this->smarty->assign('user', $user);
     }
 
     function homeLocation(){

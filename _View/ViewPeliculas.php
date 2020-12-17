@@ -1,13 +1,20 @@
 <?php
 require_once('libs/smarty/Smarty.class.php');
+require_once('helpers/auth.php');
 
 class ViewPeliculas{
 
     private $title;
+    private $helper;
 
     function __construct(){
-        $this->title= "PELIS";
         $this->smarty = new Smarty();
+        $this->title= "PELIS";
+        $this->helper= new helper();
+        $this->smarty->assign('l', "LOGOUT");
+        $this->smarty->assign('li', "LOGIN");
+        $user=$this->helper->checkUser();
+        $this->smarty->assign('user', $user);
     }
 
     function homeLocation(){
@@ -54,13 +61,6 @@ class ViewPeliculas{
         $this->smarty->assign('home', "HOME");
         $this->smarty->assign('type', $type);
         $this->smarty->assign('user', $user);
-        $this->smarty->assign('puntuaciones', array( "0" =>"SELECT",
-                                                    "1" =>"UNO", 
-                                                    "2" => "DOS", 
-                                                    "3" => "TRES",
-                                                    "4"=> "CUATRO",
-                                                    "5"=> "CINCO"
-                                                        ));
 
         $this->smarty->display('templates/onlyMovies.tpl');
     }
@@ -89,8 +89,6 @@ class ViewPeliculas{
         $this->smarty->assign('Enviar', "Enviar");
         $this->smarty->assign('calif', "Calificacion");
         $this->smarty->assign('genero', "Género");
-        $this->smarty->assign('l', "logout");
-        $this->smarty->assign('li', "login");
         $this->smarty->assign('user', $user);
         $this->smarty->assign('type', $type);
         $this->smarty->assign('tituloH', "Agregue sus peliculas favoritas");

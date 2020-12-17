@@ -17,7 +17,7 @@ Class ControllerUser{
     }
 
     function login (){
-        session_start();
+        $this->helper->start_session();
 
         if(!isset($_SESSION['USER'])){
             $this->view->render_login();
@@ -28,7 +28,7 @@ Class ControllerUser{
     }
 
     function logout(){
-        session_start();
+        $this->helper->start_session();
         session_destroy();
         $this->view->loginLocation();
     }

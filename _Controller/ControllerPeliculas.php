@@ -34,7 +34,7 @@ class ControllerPeliculas{
         $this->view->showHome($generos, $user, $type);
     }
     private function checkLogin(){
-        session_start();
+        $this->helper->start_session();
 
         if(!isset($_SESSION['TYPE'])){
             $this->viewUser->render_login();
@@ -80,7 +80,7 @@ class ControllerPeliculas{
             $userDB=$this->modelUser->getUser($user);
 
             $idUSER=$userDB->id;
-        
+            $user=$user=$this->helper->checkUser();
             $this->view->onlyMovies($peliculas, $type, $user);
         }else {
             $user=null;

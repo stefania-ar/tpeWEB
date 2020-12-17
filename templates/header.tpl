@@ -12,5 +12,23 @@
             <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         </head>
-
+        <header class="header">
+            <ul class="botonera">
+                <li class="boton_header">
+                    <a href="home">INICIO</a>
+                </li>
+                <li class="boton_header">
+                    <a href="showAll">PELICULAS</a>
+                </li>
+                <li class="boton_header">
+                    <form action="logout" method="get">
+                        {if $user eq true} 
+                            <button type="submit">{$l}</button>
+                        {else}
+                        <button type="submit">{$li}</button>
+                        {/if}
+                    </form>
+                </li>
+            </ul>
+        </header>
     <body>

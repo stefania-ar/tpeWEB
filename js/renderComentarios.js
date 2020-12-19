@@ -82,19 +82,20 @@ function renderComentarios(comen) {
     let usuario= document.getElementById("usuario").value;
 
     comen.forEach(com => {
-        let comentario=`<div class="small_row"><li>${com.comentario}</li>`;
-        let button= `<button name="boton_borrar" onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar</button>`;
-        let puntuacion= `${com.puntuacion}`;
+        let imag= `<div class="comments"><div class="user_img"> <img src="imagenes/user_image.jpg" alt="user image" class="mini-image"> </div>`
+        let comentario=`<li class="li-comment">${com.comentario}</li>`;
+        let puntuacion= `<div class="li-punt"> Puntuacion dada: ${com.puntuacion}</div>`;
+        let button= `<div  class="boton_borrar"><button onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar</button></div>`;
         
         if(usuario != "null"){
             tipo_usuario= document.getElementById("input_tipo").value;
             if ( tipo_usuario==1) {
-                lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion + button +`</div>`;
+                lista.innerHTML+=imag+ comentario + puntuacion + button +`</div>`;
             }if (tipo_usuario==0) {
-                lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
+                lista.innerHTML+= imag+ comentario + puntuacion +`</div>`;
             }
         }else{
-            lista.innerHTML+= comentario +"- Puntuacion dada: "+ puntuacion +`</div>`;
+            lista.innerHTML+=imag+ comentario + puntuacion +`</div>`;
         } 
     });
 }

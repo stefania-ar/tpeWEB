@@ -38,13 +38,6 @@
         </tbody>    
     </table>
     
-    <div class="apartado">
-        <h1 class="apartado">{$com}</h1>
-    
-        <ul id="list_comentarios">
-
-        </ul>
-    </div>
    
 </section>
     <input type="text" name="id_pelicula" hidden value="{$pelicula->id}" id="id_peli">
@@ -75,6 +68,13 @@
     </form>
 {/if}
 
+    <div class="apartado">
+        <h1 class="apartado">{$com}</h1>
+    
+        <ul id="list_comentarios">
+
+        </ul>
+    </div>
 
 <script src="./js/renderComentarios.js"></script>    
 {include file="footer.tpl"}        

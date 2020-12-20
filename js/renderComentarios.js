@@ -85,7 +85,7 @@ function renderComentarios(comen) {
         let imag= `<div class="comments"><div class="user_img"> <img src="imagenes/user_image.jpg" alt="user image" class="mini-image"> </div>`
         let comentario=`<li class="li-comment">${com.comentario}</li>`;
         let puntuacion= `<div class="li-punt"> Puntuacion dada: ${com.puntuacion}</div>`;
-        let button= `<div  class="boton_borrar"><button onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar</button></div>`;
+        let button= `<div class="boton_borrar"><button class="button-borrar" onclick="deleteComentario(${com.id})" id="id_boton${com.id}">borrar comentario</button></div>`;
         
         if(usuario != "null"){
             tipo_usuario= document.getElementById("input_tipo").value;

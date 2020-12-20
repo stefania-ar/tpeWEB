@@ -1,6 +1,15 @@
+@font-face {font-family: "Bahnschrift"; src: url("//db.onlinewebfonts.com/t/0a6ee448d1bd65c56f6cf256a7c6f20a.eot"); 
+  src: url("//db.onlinewebfonts.com/t/0a6ee448d1bd65c56f6cf256a7c6f20a.eot?#iefix") format("embedded-opentype"), 
+  url("//db.onlinewebfonts.com/t/0a6ee448d1bd65c56f6cf256a7c6f20a.woff2") format("woff2"), 
+  url("//db.onlinewebfonts.com/t/0a6ee448d1bd65c56f6cf256a7c6f20a.woff") format("woff"), 
+  url("//db.onlinewebfonts.com/t/0a6ee448d1bd65c56f6cf256a7c6f20a.ttf") format("truetype"), 
+  url("//db.onlinewebfonts.com/t/0a6ee448d1bd65c56f6cf256a7c6f20a.svg#Bahnschrift") format("svg"); 
+}
 .margin {
   margin: 5%;
 }
+
+/* SECCION COMENTARIOS */
 .comments{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 1vh 1vh 2vh 1vh;
@@ -13,7 +22,8 @@
   column-gap: 1vh;
   border-bottom: solid black;
   border-bottom: solid rgb(110, 110, 110) 1px;
-  
+  font-family: Bahnschrift;
+  font-weight: lighter;
 }
 
 li.li-comment{
@@ -38,15 +48,16 @@ li.li-comment{
   grid-column: 3/4;
   justify-content: flex-end;
 }
-.row{
-  display: flex;
-  padding: 0vh 3vh 3vh 3vh;
-  margin: 2vh 0vh 3vh 0vh;
-}
+
 
 .column{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto;
+}
+
+.form-coment{
+  display: grid;
+  grid-column: 2/5;
 }
 
 .select{
@@ -67,19 +78,17 @@ li.li-comment{
 }
 
 .apartado{
-  margin: 0vh 3vh 0vh 23vh;
+  margin: 5vh 0vh 0vh 0vh;
   border-color: #111;
   padding: 2vh 5vh 2vh 2vh;
   border-width: thin;
   border-style: solid;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.11);
-  
+  grid-column: 2/5;
 }
 
 .expand{
-  min-width: 100vh;
   min-height: 15vh;
-  max-width: 100vh;
   margin-bottom: 2vh;
 }
 
@@ -134,6 +143,13 @@ button{
   max-width: 32vh;
 }
 
+.button-borrar{
+  border: black solid 1px;
+  border-radius: 1vh;
+  min-width: 20vh;
+  text-transform: capitalize;
+}
+
 h1{
   padding-top: 2vh;
   padding-left: 2vh;
@@ -173,6 +189,7 @@ label{
   width: auto;
 }
 
+
 th{
   outline-style: solid;
   outline-width: thin;
@@ -181,11 +198,11 @@ th{
 }
 
 td{
-    outline-style: solid;
-    outline-width: thin;
-    outline-color: rgba(164, 136, 255, 0.7);
-    text-align: center;
-    padding: 0 1vh;
+  outline-style: solid;
+  outline-width: thin;
+  outline-color: rgba(164, 136, 255, 0.7);
+  text-align: center;
+  padding: 0 1vh;
 }
 
 
@@ -255,3 +272,14 @@ li.boton_header:hover{
   background-color: rgb(46, 45, 45);
 }
 
+.container-detail{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 0.5fr 0.5fr 10fr 2.5fr 1fr
+}
+.row{
+  display: grid;
+  padding: 0vh 3vh 3vh 0vh;
+  margin: 2vh 0vh 3vh 0vh;
+  justify-self: start;
+}

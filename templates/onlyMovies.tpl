@@ -39,5 +39,5 @@
         </tbody>    
     </table>
 
-{include file="button_home.tpl"}
+
 {include file="footer.tpl"}        

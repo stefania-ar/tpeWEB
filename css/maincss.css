@@ -68,8 +68,8 @@ li.li-comment{
 }
 
 .imagenes{
-  height: 450 px;
-  width: 300px;
+  height: 40vh;
+  width: 30vh;
 }
 
 .mini-image{
@@ -278,7 +278,7 @@ li.boton_header:hover{
   grid-template-columns: 0.5fr 0.5fr 10fr 2.5fr 1fr
 }
 .row{
-  display: grid;
+  display: flex;
   padding: 0vh 3vh 3vh 0vh;
   margin: 2vh 0vh 3vh 0vh;
   justify-self: start;

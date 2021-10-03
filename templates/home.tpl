@@ -49,7 +49,7 @@
                 <img src="imagenes/chihiro.jpg" class="imagenes" alt="pelicula">
                 <img src="imagenes/howls.jpg" alt="" class="imagenes">
                 <img src="imagenes/viaje_al_centro_de_la_tierra.jpg" alt="" class="imagenes">
-                <img src="imagenes/bolt.jpg" alt="">
+                <img src="imagenes/bolt.jpg" alt="" class="imagenes">
                 <img src="imagenes/et.jpg" class="imagenes" alt="">
             </section>
 

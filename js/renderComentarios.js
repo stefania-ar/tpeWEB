@@ -45,7 +45,7 @@ function insertComentario(){
 
     }
 
-    console.log("aca empieza el fetch");
+    //console.log("aca empieza el fetch");
     fetch('api/comentarios', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

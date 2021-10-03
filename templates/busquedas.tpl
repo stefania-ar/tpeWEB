@@ -1,5 +1,4 @@
 {include file="header.tpl"}
-{include file="button_home.tpl"}
 <section class="row">
 
     <table>
